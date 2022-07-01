@@ -62,7 +62,7 @@ def minmax_scaler(data, mmin=None, mmax=None, clip = [None, None]):
         
         data[:,:,b] = (data[:,:,b] - mmin)/((mmax - mmin)+E)
     
-    if clip != None: data = np.clip(data, clip[0], clip[-1])
+    if clip != [None, None]: data = np.clip(data, clip[0], clip[-1])
     
     return data
 
@@ -90,7 +90,7 @@ def max_scaler(data, mmax=None, clip = [None, None]):
     
         data[:,:,b] = data[:,:,b]/mmax
     
-    if clip != None: data = np.clip(data, clip[0], clip[-1])
+    if clip != [None, None]: data = np.clip(data, clip[0], clip[-1])
     
     return data
 
@@ -121,6 +121,6 @@ def std_scaler(data, mmean=None, sstd = None, clip = [None, None]):
     
         data[:,:,b] = (data[:,:,b] - mmean)/sstd
     
-    if clip != None: data = np.clip(data, clip[0], clip[-1])
+    if clip != [None, None]: data = np.clip(data, clip[0], clip[-1])
     
     return data

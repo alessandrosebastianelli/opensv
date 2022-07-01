@@ -9,12 +9,19 @@ Created on Tue Jun 28 11:47:42 2022
 
 
 from opensv.io.reader import load
-from opensv.pre.hist_normalizer import hist_normalizer
+from opensv.post.clouds import cloud_detector
+from opensv.pre.normalizer import max_scaler
 
+import matplotlib.pyplot as plt
 import numpy as np
 
-img, meta, bounds = load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-13_2.tif')
-#img = minmax_scaler(img, clip=[0,1])
+img, meta, bounds = load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-21.tif')
+
+#load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-13_2.tif')
+img = max_scaler(img, mmax = 10000)
+
+
+
 
 rgb = np.array(
     [
@@ -26,9 +33,9 @@ rgb = np.array(
 
 rgb = np.moveaxis(rgb, 0, -1)
 
-hist_normalizer(rgb)
 
-#geo_plot(rgb, meta, bounds)
+plt.imshow(rgb)
+plt.show()
 
 
 
