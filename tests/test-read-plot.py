@@ -6,8 +6,6 @@ Created on Tue Jun 28 11:47:42 2022
 @author: alessandrosebastianelli
 """
 
-
-
 from opensv.io.reader import load
 from opensv.post.clouds import cloud_detector, white_detector
 from opensv.pre.normalizer import max_scaler
