@@ -16,8 +16,16 @@ import numpy as np
 
 
 def hist_normalizer(img):
-
-
+    '''
+    
+        Open a gui that helps to stretch the histogram of an image
+    
+        
+        Inputs:
+            - img: a WxHxB image, with width W, height H and B bands (B can be 1 or 3) 
+    '''
+    
+    # Update plot
     def plot(img):
         # Clear axis
         axes[0].cla()
@@ -38,6 +46,7 @@ def hist_normalizer(img):
         axes[1].legend()
         chart_type.draw()
     
+    # Scale values using the sliders
     def scalevalue(value, other = img):
         image = np.clip(img, wmin.get(), wmax.get())    
         plot(image)
