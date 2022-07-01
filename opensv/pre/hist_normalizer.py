@@ -6,6 +6,8 @@ Created on Fri Jul  1 16:07:47 2022
 @author: alessandrosebastianelli
 """
 
+from opensv.utils.mapper import mapFromTo
+
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import Tk, mainloop, Scale, HORIZONTAL
@@ -16,10 +18,6 @@ import numpy as np
 def hist_normalizer(img):
 
 
-    def mapFromTo(x,a,b,c,d):
-        y=(x-a)/(b-a)*(d-c)+c
-        return y
-    
     def plot(img):
         # Clear axis
         axes[0].cla()
