@@ -51,7 +51,6 @@ def hist_normalizer(img):
         image = np.clip(img, wmin.get(), wmax.get())    
         plot(image)
     
-    
     figure, axes = plt.subplots(nrows = 1, ncols = 2, figsize=(10,5), dpi=100)
     
     # GUI
