@@ -124,4 +124,3 @@ def std_scaler(data, mmean=None, sstd = None, clip = [None, None]):
     if clip != None: data = np.clip(data, clip[0], clip[-1])
     
     return data
-

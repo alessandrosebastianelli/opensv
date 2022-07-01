@@ -9,7 +9,6 @@ Created on Tue Jun 28 10:52:26 2022
 from ..pre.normalized_difference import normalized_difference
 
 
-
 def ndvi(image, red_index=3, nir_index=7):
     '''
         Calculate the Normalized Difference Vegetation Index described by equation (1)
@@ -31,5 +30,3 @@ def ndvi(image, red_index=3, nir_index=7):
     ndvi = normalized_difference(image[:,:,nir_index], image[:,:,red_index])
     
     return ndvi
-
-

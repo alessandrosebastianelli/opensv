@@ -32,4 +32,3 @@ def gaussian_filter(shape, mx=0, my=0, sx=1, sy=1, invert=False):
     if invert: fxy = 1-fxy
     
     return fxy
-    
