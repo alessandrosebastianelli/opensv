@@ -6,8 +6,8 @@ Created on Mon Jun 27 16:02:38 2022
 @author: alessandrosebastianelli
 """
 
-from normalized_difference import normalized_difference
-from normalizer import minmax_scaler
+from opensv.pre.normalized_difference import normalized_difference
+from opensv.pre.normalizer import minmax_scaler
 
 
 import scipy.signal as scisig
