@@ -21,13 +21,10 @@ img, meta, bounds = load('/Users/alessandrosebastianelli/Desktop/SentinelDataAna
 img = max_scaler(img, mmax = 4000)
 
 
-rgb = np.array(
-    [
+rgb = np.array([
      img[:,:,3],
      img[:,:,2],
-     img[:,:,1]
-     ]
-    )
+     img[:,:,1]])
 
 rgb = np.moveaxis(rgb, 0, -1)
 rgb = np.clip(rgb, 0.0, 1.0)
