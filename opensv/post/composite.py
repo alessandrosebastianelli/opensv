@@ -9,7 +9,7 @@ Created on Fri Jul  1 15:45:28 2022
 import numpy as np
 
 
-def rgb_composite(image, rgb = [4,3,2]):
+def rgb_composite(image, rgb = [3,2,1]):
     '''
     
         Create an RGB composite.
