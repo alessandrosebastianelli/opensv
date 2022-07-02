@@ -27,7 +27,7 @@ ir = swir_highlight(img)
 
 
 
-
+#============================ PLOT ============================#
 fig, axes = plt.subplots(nrows = 2, ncols = 1, figsize = (6,8))
 
 axes[0].imshow(rgb)
