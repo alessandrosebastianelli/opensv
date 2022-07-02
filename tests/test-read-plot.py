@@ -11,17 +11,17 @@ from opensv.post.composite import rgb_composite, swir_highlight
 from opensv.pre.normalizer import max_scaler
 
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 img, meta, bounds = load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-13_2.tif')
 
 #load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-21.tif')
 
 #load('/Users/alessandrosebastianelli/Desktop/SentinelDataAnalysis/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-13_2.tif')
-img = max_scaler(img, mmax = 4000)
+img = max_scaler(img, mmax = 10000)
 
-rgb = rgb_composite(img, rgb=[3,2,1])
-rgb = np.clip(rgb, 0.0, 1.0)
+rgb = 3*rgb_composite(img, rgb=[3,2,1])
+
 
 ir = swir_highlight(img)
 
