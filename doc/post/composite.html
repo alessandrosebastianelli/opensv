@@ -41,7 +41,7 @@ Created on Fri Jul  1 15:45:28 2022
 import numpy as np
 
 
-def rgb_composite(image, rgb = [4,3,2]):
+def rgb_composite(image, rgb = [3,2,1]):
     &#39;&#39;&#39;
     
         Create an RGB composite.
@@ -55,12 +55,12 @@ def rgb_composite(image, rgb = [4,3,2]):
             composite: a WxHx3 rgb image
     &#39;&#39;&#39;  
     
-    composite = np.array([image[rgb[0]], image[rgb[1]], image[rgb[2]]])
+    composite = np.array([image[:,:,rgb[0]], image[:,:,rgb[1]], image[:,:,rgb[2]]])
     composite = np.moveaxis(composite, 0, -1)
     
     return composite
 
-def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
+def swir_highlight(image, rgb = [3,2,1], swir = [10,11]):
     &#39;&#39;&#39;
     
         Create an RGB image in which pixels at high temperature are enanched.
@@ -81,9 +81,9 @@ def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
 
     alpha = 2.5
     
-    r = alpha * image[rgb[0]] + np.max(0, image[swir[0]] - 0.1)
-    g = alpha * image[rgb[1]] + np.max(0, image[swir[1]] - 0.1)
-    b = alpha * image[rgb[2]] 
+    r = alpha * image[:,:,rgb[0]] + np.maximum(0, image[:,:,swir[0]] - 0.1)
+    g = alpha * image[:,:,rgb[1]] + np.maximum(0, image[:,:,swir[1]] - 0.1)
+    b = alpha * image[:,:,rgb[2]] 
     
     composite = np.array([r,g,b])
     composite = np.moveaxis(composite, 0, -1)
@@ -99,7 +99,7 @@ def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="opensv.post.composite.rgb_composite"><code class="name flex">
-<span>def <span class="ident">rgb_composite</span></span>(<span>image, rgb=[4, 3, 2])</span>
+<span>def <span class="ident">rgb_composite</span></span>(<span>image, rgb=[3, 2, 1])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create an RGB composite.
@@ -115,7 +115,7 @@ def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def rgb_composite(image, rgb = [4,3,2]):
+<pre><code class="python">def rgb_composite(image, rgb = [3,2,1]):
     &#39;&#39;&#39;
     
         Create an RGB composite.
@@ -129,14 +129,14 @@ def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
             composite: a WxHx3 rgb image
     &#39;&#39;&#39;  
     
-    composite = np.array([image[rgb[0]], image[rgb[1]], image[rgb[2]]])
+    composite = np.array([image[:,:,rgb[0]], image[:,:,rgb[1]], image[:,:,rgb[2]]])
     composite = np.moveaxis(composite, 0, -1)
     
     return composite</code></pre>
 </details>
 </dd>
 <dt id="opensv.post.composite.swir_highlight"><code class="name flex">
-<span>def <span class="ident">swir_highlight</span></span>(<span>image, rgb=[4, 3, 2], swir=[10, 11])</span>
+<span>def <span class="ident">swir_highlight</span></span>(<span>image, rgb=[3, 2, 1], swir=[10, 11])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create an RGB image in which pixels at high temperature are enanched.
@@ -157,7 +157,7 @@ BLUE  = a * BLUE                                (1c)
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
+<pre><code class="python">def swir_highlight(image, rgb = [3,2,1], swir = [10,11]):
     &#39;&#39;&#39;
     
         Create an RGB image in which pixels at high temperature are enanched.
@@ -178,9 +178,9 @@ BLUE  = a * BLUE                                (1c)
 
     alpha = 2.5
     
-    r = alpha * image[rgb[0]] + np.max(0, image[swir[0]] - 0.1)
-    g = alpha * image[rgb[1]] + np.max(0, image[swir[1]] - 0.1)
-    b = alpha * image[rgb[2]] 
+    r = alpha * image[:,:,rgb[0]] + np.maximum(0, image[:,:,swir[0]] - 0.1)
+    g = alpha * image[:,:,rgb[1]] + np.maximum(0, image[:,:,swir[1]] - 0.1)
+    b = alpha * image[:,:,rgb[2]] 
     
     composite = np.array([r,g,b])
     composite = np.moveaxis(composite, 0, -1)
