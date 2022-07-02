@@ -23,7 +23,7 @@ def rgb_composite(image, rgb = [3,2,1]):
             composite: a WxHx3 rgb image
     '''  
     
-    composite = np.array([image[rgb[0]], image[rgb[1]], image[rgb[2]]])
+    composite = np.array([image[:,:,rgb[0]], image[:,:,rgb[1]], image[:,:,rgb[2]]])
     composite = np.moveaxis(composite, 0, -1)
     
     return composite

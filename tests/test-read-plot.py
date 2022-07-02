@@ -7,7 +7,6 @@ Created on Tue Jun 28 11:47:42 2022
 """
 
 from opensv.io.reader import load
-from opensv.post.clustering import pixel_clustering
 from opensv.post.composite import rgb_composite
 from opensv.pre.normalizer import max_scaler
 
