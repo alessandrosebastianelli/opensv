@@ -9,7 +9,7 @@ Created on Tue Jun 28 11:47:42 2022
 from opensv.io.reader import load
 from opensv.post.composite import rgb_composite
 from opensv.pre.normalizer import max_scaler
-from opensv.plot.plot import plot
+from opensv.plot.plot import plot, bands_plot
 
 
 
@@ -22,7 +22,7 @@ img = max_scaler(img, mmax = 10000)
 rgb = 3*rgb_composite(img, rgb=[3,2,1])
 
 
-plot(rgb, hist=True)
+bands_plot(img, hist=False)
 
 
 
