@@ -7,7 +7,7 @@ Created on Tue Jun 28 11:47:42 2022
 """
 
 from opensv.io.reader import load
-from opensv.post.composite import rgb_composite
+from opensv.post.composite import rgb_composite, swir_highlight
 from opensv.pre.normalizer import max_scaler
 
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ img = max_scaler(img, mmax = 4000)
 rgb = rgb_composite(img, rgb=[3,2,1])
 rgb = np.clip(rgb, 0.0, 1.0)
 
-
+ir = swir_highlight(img)
 
 
 
@@ -31,6 +31,7 @@ rgb = np.clip(rgb, 0.0, 1.0)
 fig, axes = plt.subplots(nrows = 2, ncols = 1, figsize = (6,8))
 
 axes[0].imshow(rgb)
+axes[1].imshow(ir)
 
 fig.tight_layout()
 plt.show()

@@ -28,7 +28,7 @@ def rgb_composite(image, rgb = [3,2,1]):
     
     return composite
 
-def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
+def swir_highlight(image, rgb = [3,2,1], swir = [10,11]):
     '''
     
         Create an RGB image in which pixels at high temperature are enanched.
@@ -49,9 +49,9 @@ def swir_highlight(image, rgb = [4,3,2], swir = [10,11]):
 
     alpha = 2.5
     
-    r = alpha * image[rgb[0]] + np.max(0, image[swir[0]] - 0.1)
-    g = alpha * image[rgb[1]] + np.max(0, image[swir[1]] - 0.1)
-    b = alpha * image[rgb[2]] 
+    r = alpha * image[:,:,rgb[0]] + np.maximum(0, image[:,:,swir[0]] - 0.1)
+    g = alpha * image[:,:,rgb[1]] + np.maximum(0, image[:,:,swir[1]] - 0.1)
+    b = alpha * image[:,:,rgb[2]] 
     
     composite = np.array([r,g,b])
     composite = np.moveaxis(composite, 0, -1)
