@@ -22,6 +22,7 @@ img = max_scaler(img, mmax = 10000)
 rgb = 3*rgb_composite(img, rgb=[3,2,1])
 
 
+plot(rgb, hist=False)
 bands_plot(img, hist=True)
 
 
