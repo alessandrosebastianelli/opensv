@@ -14,8 +14,6 @@ from opensv.post.composite import rgb_composite
 from opensv.pre.normalizer import max_scaler
 from opensv.plot.plot import plot
 
-
-
 img, meta, bounds = load('tests/data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-21.tif')
 
 #load('data/S2-lat_45_85299971127813_lon_10_852932810361423-2019-06-21.tif')
