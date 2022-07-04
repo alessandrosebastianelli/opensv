@@ -5,11 +5,14 @@ Created on Tue Jun 28 11:47:42 2022
 
 @author: alessandrosebastianelli
 """
-        
+
+import sys
+sys.path.append('.')
+
 from opensv.io.reader import load
 from opensv.post.composite import rgb_composite
 from opensv.pre.normalizer import max_scaler
-from opensv.plot.plot import plot, bands_plot
+from opensv.plot.plot import plot
 
 
 
@@ -22,8 +25,7 @@ img = max_scaler(img, mmax = 10000)
 rgb = 3*rgb_composite(img, rgb=[3,2,1])
 
 
-plot(rgb, hist=False)
-bands_plot(img, hist=True)
+plot(rgb, hist=True)
 
 
 
