@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>opensv.plot API documentation</title>
-<meta name="description" content="Created on Sun Jun 26 16:53:52 2022 …" />
+<title>opensv.plot.cube API documentation</title>
+<meta name="description" content="Created on Tue Jul 5 14:01:04 2022 …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,10 +19,10 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>opensv.plot</code></h1>
+<h1 class="title">Module <code>opensv.plot.cube</code></h1>
 </header>
 <section id="section-intro">
-<p>Created on Sun Jun 26 16:53:52 2022</p>
+<p>Created on Tue Jul 5 14:01:04 2022</p>
 <p>@author: alessandrosebastianelli</p>
 <details class="source">
 <summary>
@@ -31,33 +31,161 @@
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 &#34;&#34;&#34;
-Created on Sun Jun 26 16:53:52 2022
+Created on Tue Jul 5 14:01:04 2022
 
 @author: alessandrosebastianelli
-&#34;&#34;&#34;</code></pre>
+&#34;&#34;&#34;
+
+from mayavi import mlab
+
+def plot3d(image, animate = False):
+    &#39;&#39;&#39;
+        3D-Plot of a multibands image.
+
+        Input:
+            - image: a WxHxB image, with height H, width W and B bands
+            - animate: activate the animation mode
+
+    &#39;&#39;&#39;
+
+    fig = mlab.figure(figure=&#39;Plot 3D&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+
+    v = mlab.volume_slice(image, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+
+    if animate:
+        @mlab.animate
+        def anim():
+            ct = 0
+            while True:
+                if ct &gt;= image.shape[-1]:
+                    ct = 0
+                v.mlab_source.scalars = image[:, :, ct]
+                ct += 1
+
+                yield
+        anim()
+
+    mlab.show()
+
+def cube_plot(image):
+    &#39;&#39;&#39;
+        Plot data cube
+
+        Input:
+            - image: a WxHxB image, with height H, width W and B bands
+
+    &#39;&#39;&#39;
+    
+    fig = mlab.figure(figure=&#39;Cube Plot&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+
+    scalars = image  # specifying the data array
+
+    # Crossline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;x_axes&#39;, figure=fig)  # crossline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[0], plane_orientation=&#39;x_axes&#39;, figure=fig)  # crossline slice
+
+    # Inline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
+    # Dept slices
+    mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+
+    mlab.show()</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="opensv.plot.cube" href="cube.html">opensv.plot.cube</a></code></dt>
+<dt id="opensv.plot.cube.cube_plot"><code class="name flex">
+<span>def <span class="ident">cube_plot</span></span>(<span>image)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Created on Tue Jul 5 14:01:04 2022 …</p></div>
+<div class="desc"><p>Plot data cube</p>
+<h2 id="input">Input</h2>
+<ul>
+<li>image: a WxHxB image, with height H, width W and B bands</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cube_plot(image):
+    &#39;&#39;&#39;
+        Plot data cube
+
+        Input:
+            - image: a WxHxB image, with height H, width W and B bands
+
+    &#39;&#39;&#39;
+    
+    fig = mlab.figure(figure=&#39;Cube Plot&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+
+    scalars = image  # specifying the data array
+
+    # Crossline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;x_axes&#39;, figure=fig)  # crossline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[0], plane_orientation=&#39;x_axes&#39;, figure=fig)  # crossline slice
+
+    # Inline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
+    # Dept slices
+    mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+
+    mlab.show()</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="opensv.plot.geo" href="geo.html">opensv.plot.geo</a></code></dt>
+<dt id="opensv.plot.cube.plot3d"><code class="name flex">
+<span>def <span class="ident">plot3d</span></span>(<span>image, animate=False)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>Created on Tue Jun 28 11:13:29 2022 …</p></div>
-</dd>
-<dt><code class="name"><a title="opensv.plot.plot" href="plot.html">opensv.plot.plot</a></code></dt>
-<dd>
-<div class="desc"><p>Created on Sat Jul
-2 16:52:56 2022 …</p></div>
+<div class="desc"><p>3D-Plot of a multibands image.</p>
+<h2 id="input">Input</h2>
+<ul>
+<li>image: a WxHxB image, with height H, width W and B bands</li>
+<li>animate: activate the animation mode</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot3d(image, animate = False):
+    &#39;&#39;&#39;
+        3D-Plot of a multibands image.
+
+        Input:
+            - image: a WxHxB image, with height H, width W and B bands
+            - animate: activate the animation mode
+
+    &#39;&#39;&#39;
+
+    fig = mlab.figure(figure=&#39;Plot 3D&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+
+    v = mlab.volume_slice(image, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
+
+    if animate:
+        @mlab.animate
+        def anim():
+            ct = 0
+            while True:
+                if ct &gt;= image.shape[-1]:
+                    ct = 0
+                v.mlab_source.scalars = image[:, :, ct]
+                ct += 1
+
+                yield
+        anim()
+
+    mlab.show()</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -70,14 +198,13 @@ Created on Sun Jun 26 16:53:52 2022
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="opensv" href="../index.html">opensv</a></code></li>
+<li><code><a title="opensv.plot" href="index.html">opensv.plot</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="opensv.plot.cube" href="cube.html">opensv.plot.cube</a></code></li>
-<li><code><a title="opensv.plot.geo" href="geo.html">opensv.plot.geo</a></code></li>
-<li><code><a title="opensv.plot.plot" href="plot.html">opensv.plot.plot</a></code></li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="opensv.plot.cube.cube_plot" href="#opensv.plot.cube.cube_plot">cube_plot</a></code></li>
+<li><code><a title="opensv.plot.cube.plot3d" href="#opensv.plot.cube.plot3d">plot3d</a></code></li>
 </ul>
 </li>
 </ul>
