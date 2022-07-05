@@ -21,7 +21,7 @@ rgb = 3*rgb_composite(img, rgb=[3, 2, 1])
 
 
 
-cube_plot(img[:512, :512, :-3])
+cube_plot(img[:32, :32, :-3])
 
 
 
