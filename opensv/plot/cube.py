@@ -45,7 +45,7 @@ def cube_plot(image):
             - image: a WxHxB image, with height H, width W and B bands
 
     '''
-    
+
     fig = mlab.figure(figure='Cube Plot', bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
 
     scalars = image  # specifying the data array
