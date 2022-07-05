@@ -77,4 +77,4 @@ def ifft3d(ffts):
     iffts = np.array(iffts)
     iffts = np.moveaxis(iffts, 0, -1)
         
-    return iffts       
+    return iffts

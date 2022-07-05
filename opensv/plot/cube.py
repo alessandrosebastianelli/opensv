@@ -6,29 +6,35 @@ Created on Tue Jul 5 14:01:04 2022
 @author: alessandrosebastianelli
 """
 
-
 import matplotlib.pyplot as plt
 import numpy as np
 
+import matplotlib.pyplot as plt
+from mayavi import mlab
 
-def cube_plot(image):
+
+def plot3d(image, animate):
     '''
-        3D - Plot of a multibands image.
-
-        !!! This function is not efficient, so use it carefully.
-        A 64x64x12 image takes minutes to be rendered!!!
-
+        3D-Plot of a multibands image.
+        
         Input:
             - image: a WxHxB image, with height H, width W and B bands
+            - animate: activate the animation mode
 
     '''
 
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    colors = np.repeat(image[:, :, :, np.newaxis], 3, axis=3)
-    ax.voxels(image, facecolors=colors, edgecolors=None)
-    ax.axis(False)
-    plt.show()
+    fig = mlab.figure(figure='Plote 3D', bgcolor=(1, 1, 1), fgcolor=(0, 0, 0))
 
+    v = mlab.volume_slice(image, slice_index=0, plane_orientation='z_axes', figure=fig)  # depth slice
+
+    if animate:
+        @mlab.animate
+        def anim():
+            for i in range(image.shape[-1]):
+                v.mlab_source.scalars = image[:, :, i]
+                yield
+        anim()
+
+    mlab.show()
 
 
