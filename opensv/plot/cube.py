@@ -36,3 +36,21 @@ def plot3d(image, animate = False):
         anim()
 
     mlab.show()
+
+def cube_plot(image):
+    fig = mlab.figure(figure='Cube Plot', bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+
+    scalars = image  # specifying the data array
+
+    # Crossline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='x_axes', figure=fig)  # crossline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[0], plane_orientation='x_axes', figure=fig)  # crossline slice
+
+    # Inline slices
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='y_axes', figure=fig)  # inline slice
+    mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation='y_axes', figure=fig)  # inline slice
+    # Dept slices
+    mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation='z_axes', figure=fig)  # depth slice
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='z_axes', figure=fig)  # depth slice
+
+    mlab.show()
