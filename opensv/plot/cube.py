@@ -58,7 +58,9 @@ def cube_plot(image):
     mlab.volume_slice(scalars, slice_index=0, plane_orientation='y_axes', figure=fig)  # inline slice
     mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation='y_axes', figure=fig)  # inline slice
     # Dept slices
+
     mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation='z_axes', figure=fig)  # depth slice
     mlab.volume_slice(scalars, slice_index=0, plane_orientation='z_axes', figure=fig)  # depth slice
 
+    mlab.draw()
     mlab.show()
