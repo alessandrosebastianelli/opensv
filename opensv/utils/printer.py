@@ -11,20 +11,21 @@ import numpy as np
 
 def dict_disp(dict):
     '''
+
         Print a dictionary in a more readable way
 
         Input:
             - dict: python dictionary to print
-
     '''
+
     print('//----------- Dictionary -----------//')
 
     for key, value in dict.items():
         print('\t [*] {} : {}'.format(key, value))
 
-
 def print_stats(image, perband=False):
     '''
+
         Print some statistics for the input image
 
         Inputs:
