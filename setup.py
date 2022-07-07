@@ -20,6 +20,11 @@ setup(
                        'matplotlib==3.4.3',
                        'rasterio==1.2.10',
                        'scipy==1.7.1',
-                       'basemap==1.3.3'
+                       'basemap==1.3.3',
+                       'scikit-learn==1.0',
+                       'cartopy==0.20.1.dev139+gc5247d5',
+                       'mayavi==4.7.4',
+                       'opencv-python==4.6.0.66',
+                       'pyproj==3.3.1'
                        ]
 )
