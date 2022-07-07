@@ -23,11 +23,11 @@ img, meta, bounds = load('tests/data/S2-lat_45_85299971127813_lon_10_85293281036
 img = max_scaler(img, mmax = 10000)
 rgb = 3*rgb_composite(img, rgb=[3, 2, 1])
 
-expanded = np.repeat(img[:,:,:-3], 20, axis=-1)
+expanded = np.repeat(img[:,:,:-3], 10, axis=-1)
 
-print_stats(img, perband=False)
-print_stats(img, perband=True)
-#cube_plot(expanded)
+#print_stats(img, perband=False)
+#print_stats(img, perband=True)
+cube_plot(expanded)
 
 
 
