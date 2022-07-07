@@ -75,7 +75,7 @@ def cube_plot(image):
             - image: a WxHxB image, with height H, width W and B bands
 
     &#39;&#39;&#39;
-    
+
     fig = mlab.figure(figure=&#39;Cube Plot&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
 
     scalars = image  # specifying the data array
@@ -88,9 +88,11 @@ def cube_plot(image):
     mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
     mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
     # Dept slices
+
     mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
     mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
 
+    mlab.draw()
     mlab.show()</code></pre>
 </details>
 </section>
@@ -122,7 +124,7 @@ def cube_plot(image):
             - image: a WxHxB image, with height H, width W and B bands
 
     &#39;&#39;&#39;
-    
+
     fig = mlab.figure(figure=&#39;Cube Plot&#39;, bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
 
     scalars = image  # specifying the data array
@@ -135,9 +137,11 @@ def cube_plot(image):
     mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
     mlab.volume_slice(scalars, slice_index=image.shape[1], plane_orientation=&#39;y_axes&#39;, figure=fig)  # inline slice
     # Dept slices
+
     mlab.volume_slice(scalars, slice_index=image.shape[-1], plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
     mlab.volume_slice(scalars, slice_index=0, plane_orientation=&#39;z_axes&#39;, figure=fig)  # depth slice
 
+    mlab.draw()
     mlab.show()</code></pre>
 </details>
 </dd>

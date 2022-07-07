@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>opensv.post.clustering API documentation</title>
+<title>opensv.ai.clustering API documentation</title>
 <meta name="description" content="Created on Fri Jul
 1 19:42:46 2022 …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
@@ -20,7 +20,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>opensv.post.clustering</code></h1>
+<h1 class="title">Module <code>opensv.ai.clustering</code></h1>
 </header>
 <section id="section-intro">
 <p>Created on Fri Jul
@@ -53,16 +53,14 @@ def pixel_clustering(img, n_clusters = 3):
             - cliusted: clustered pixels
     &#39;&#39;&#39;
     
-    # For clustering the image using k-means, we first need to convert it into a 2-dimensional array
-    image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
 
+    image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
     kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(image_2D)
-    #clustered = kmeans.cluster_centers_[kmeans.labels_]
-    #clustered_3D = clustered.reshape(img.shape[0], img.shape[1], img.shape[2])
-    
     cliusted = np.array(kmeans.labels_).reshape(img.shape[0], img.shape[1])
     
-    return cliusted</code></pre>
+    return cliusted
+
+def conv_clustering(): pass</code></pre>
 </details>
 </section>
 <section>
@@ -72,7 +70,19 @@ def pixel_clustering(img, n_clusters = 3):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="opensv.post.clustering.pixel_clustering"><code class="name flex">
+<dt id="opensv.ai.clustering.conv_clustering"><code class="name flex">
+<span>def <span class="ident">conv_clustering</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def conv_clustering(): pass</code></pre>
+</details>
+</dd>
+<dt id="opensv.ai.clustering.pixel_clustering"><code class="name flex">
 <span>def <span class="ident">pixel_clustering</span></span>(<span>img, n_clusters=3)</span>
 </code></dt>
 <dd>
@@ -101,13 +111,9 @@ def pixel_clustering(img, n_clusters = 3):
             - cliusted: clustered pixels
     &#39;&#39;&#39;
     
-    # For clustering the image using k-means, we first need to convert it into a 2-dimensional array
-    image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
 
+    image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
     kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(image_2D)
-    #clustered = kmeans.cluster_centers_[kmeans.labels_]
-    #clustered_3D = clustered.reshape(img.shape[0], img.shape[1], img.shape[2])
-    
     cliusted = np.array(kmeans.labels_).reshape(img.shape[0], img.shape[1])
     
     return cliusted</code></pre>
@@ -126,12 +132,13 @@ def pixel_clustering(img, n_clusters = 3):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="opensv.post" href="index.html">opensv.post</a></code></li>
+<li><code><a title="opensv.ai" href="index.html">opensv.ai</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="opensv.post.clustering.pixel_clustering" href="#opensv.post.clustering.pixel_clustering">pixel_clustering</a></code></li>
+<li><code><a title="opensv.ai.clustering.conv_clustering" href="#opensv.ai.clustering.conv_clustering">conv_clustering</a></code></li>
+<li><code><a title="opensv.ai.clustering.pixel_clustering" href="#opensv.ai.clustering.pixel_clustering">pixel_clustering</a></code></li>
 </ul>
 </li>
 </ul>

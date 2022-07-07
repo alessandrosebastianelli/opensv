@@ -36,13 +36,49 @@ Created on Sat Jun 25 20:19:40 2022
 @author: alessandrosebastianelli
 &#34;&#34;&#34;
 
+import numpy as np
+
+
 def dict_disp(dict):
+    &#39;&#39;&#39;
+
+        Print a dictionary in a more readable way
+
+        Input:
+            - dict: python dictionary to print
+    &#39;&#39;&#39;
 
     print(&#39;//----------- Dictionary -----------//&#39;)
 
     for key, value in dict.items():
         print(&#39;\t [*] {} : {}&#39;.format(key, value))
-        </code></pre>
+
+def print_stats(image, perband=False):
+    &#39;&#39;&#39;
+
+        Print some statistics for the input image
+
+        Inputs:
+            - image: a WxHxB image, with width W, height H and B bands
+            - perband (optional): if true the function will print the statistics for each band separately
+    &#39;&#39;&#39;
+
+    print(&#39;//----------- Image Statistics -----------//&#39;)
+    if perband:
+
+        for i in range(image.shape[-1]):
+            print(&#39;\t Band #{}&#39;.format(i))
+            print(&#39;\t\t Max                {0:.5f}&#39;.format(np.max(image[:, :, i])))
+            print(&#39;\t\t Min                {0:.5f}&#39;.format(np.min(image[:, :, i])))
+            print(&#39;\t\t Mean               {0:.5f}&#39;.format(np.mean(image[:, :, i])))
+            print(&#39;\t\t Standard Deviation {0:.5f}&#39;.format(np.std(image[:, :, i])))
+            print(&#39;\t\t Median             {0:.5f}&#39;.format(np.median(image[:, :, i])))
+    else:
+        print(&#39;\t Max                {0:.5f}&#39;.format(np.max(image)))
+        print(&#39;\t Min                {0:.5f}&#39;.format(np.min(image)))
+        print(&#39;\t Mean               {0:.5f}&#39;.format(np.mean(image)))
+        print(&#39;\t Standard Deviation {0:.5f}&#39;.format(np.std(image)))
+        print(&#39;\t Median             {0:.5f}&#39;.format(np.median(image)))</code></pre>
 </details>
 </section>
 <section>
@@ -56,17 +92,70 @@ def dict_disp(dict):
 <span>def <span class="ident">dict_disp</span></span>(<span>dict)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Print a dictionary in a more readable way</p>
+<h2 id="input">Input</h2>
+<ul>
+<li>dict: python dictionary to print</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def dict_disp(dict):
+    &#39;&#39;&#39;
+
+        Print a dictionary in a more readable way
+
+        Input:
+            - dict: python dictionary to print
+    &#39;&#39;&#39;
 
     print(&#39;//----------- Dictionary -----------//&#39;)
 
     for key, value in dict.items():
         print(&#39;\t [*] {} : {}&#39;.format(key, value))</code></pre>
+</details>
+</dd>
+<dt id="opensv.utils.printer.print_stats"><code class="name flex">
+<span>def <span class="ident">print_stats</span></span>(<span>image, perband=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print some statistics for the input image</p>
+<h2 id="inputs">Inputs</h2>
+<ul>
+<li>image: a WxHxB image, with width W, height H and B bands</li>
+<li>perband (optional): if true the function will print the statistics for each band separately</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_stats(image, perband=False):
+    &#39;&#39;&#39;
+
+        Print some statistics for the input image
+
+        Inputs:
+            - image: a WxHxB image, with width W, height H and B bands
+            - perband (optional): if true the function will print the statistics for each band separately
+    &#39;&#39;&#39;
+
+    print(&#39;//----------- Image Statistics -----------//&#39;)
+    if perband:
+
+        for i in range(image.shape[-1]):
+            print(&#39;\t Band #{}&#39;.format(i))
+            print(&#39;\t\t Max                {0:.5f}&#39;.format(np.max(image[:, :, i])))
+            print(&#39;\t\t Min                {0:.5f}&#39;.format(np.min(image[:, :, i])))
+            print(&#39;\t\t Mean               {0:.5f}&#39;.format(np.mean(image[:, :, i])))
+            print(&#39;\t\t Standard Deviation {0:.5f}&#39;.format(np.std(image[:, :, i])))
+            print(&#39;\t\t Median             {0:.5f}&#39;.format(np.median(image[:, :, i])))
+    else:
+        print(&#39;\t Max                {0:.5f}&#39;.format(np.max(image)))
+        print(&#39;\t Min                {0:.5f}&#39;.format(np.min(image)))
+        print(&#39;\t Mean               {0:.5f}&#39;.format(np.mean(image)))
+        print(&#39;\t Standard Deviation {0:.5f}&#39;.format(np.std(image)))
+        print(&#39;\t Median             {0:.5f}&#39;.format(np.median(image)))</code></pre>
 </details>
 </dd>
 </dl>
@@ -88,6 +177,7 @@ def dict_disp(dict):
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="opensv.utils.printer.dict_disp" href="#opensv.utils.printer.dict_disp">dict_disp</a></code></li>
+<li><code><a title="opensv.utils.printer.print_stats" href="#opensv.utils.printer.print_stats">print_stats</a></code></li>
 </ul>
 </li>
 </ul>
