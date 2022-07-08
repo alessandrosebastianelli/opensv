@@ -23,10 +23,8 @@ def patch_extractor(image, shape=(64, 64), stride=(1, 1)):
     '''
 
     width, height, channels = image.shape
-
     w_out = 1 + ((width - shape[0]) // stride[0])
     h_out = 1 + ((height - shape[1]) // stride[1])
-
     patches = np.zeros((w_out * h_out, shape[0], shape[1], channels))
 
     ct = 0
