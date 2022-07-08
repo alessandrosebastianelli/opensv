@@ -26,7 +26,7 @@ def ndvi(image, red_index=3, nir_index=7):
             - ndvi: the NDVI calculated using (1)
 
     '''
-    
+
     ndvi_v = normalized_difference(image[:, :, nir_index], image[:, :, red_index])
-    
+
     return ndvi_v
