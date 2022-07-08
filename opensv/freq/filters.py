@@ -50,8 +50,7 @@ def lhp_filter(fft, radius=0.5, invert=False):
     
     x = np.linspace(-1, 1, fft.shape[0])
     y = np.linspace(-1, 1, fft.shape[1])
-    
-    x, y = np.meshgrid(x,y)
+    x, y = np.meshgrid(x, y)
 
     fxy = np.sqrt(x**2 + y**2)
 
