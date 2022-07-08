@@ -8,7 +8,6 @@ Created on Sat Jun 25 20:19:40 2022
 
 import numpy as np
 
-
 def dict_disp(dict):
     '''
 
@@ -21,7 +20,7 @@ def dict_disp(dict):
     print('//----------- Dictionary -----------//')
 
     for key, value in dict.items():
-        print('\t [*] {} : {}'.format(key, value))
+        print('\t [*] {} : {}'.format(str(key), str(value)))
 
 def print_stats(image, perband=False):
     '''
@@ -35,6 +34,7 @@ def print_stats(image, perband=False):
 
     print('//----------- Image Statistics -----------//')
     print('\t [*] Shape              {}'.format(image.shape))
+
     if perband:
         for i in range(image.shape[-1]):
             print('\t Band #{}'.format(i))
