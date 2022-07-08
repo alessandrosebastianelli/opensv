@@ -21,7 +21,7 @@ def save(image, path):
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
 
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):
-        # To be implemented, save as tiff
+        # To be implemented, save as tif
         pass
 
     elif any(frmt in path for frmt in MATPLOTLIB_EXTENSIONS):

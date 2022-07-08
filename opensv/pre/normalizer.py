@@ -58,7 +58,7 @@ def minmax_scaler(data, mmin=None, mmax=None, clip = [None, None]):
     
     data = (data - mmin)/((mmax - mmin)+E)
     
-    if clip != [None, None]: data = np.clip(data, clip[0], clip[-1])
+    if clip != [None, None]: data = np.clip(data, clip[0], clip[1])
     
     return data
 
