@@ -8,11 +8,10 @@ Created on Thu Jul 7 10:56:04 2022
 
 from sklearn.decomposition import PCA
 
-
 def image_PCA(image, n_components):
     '''
 
-        Reduce the image dimensionality along the frequency axis
+        Reduce the image dimensionality along the frequency axis using PLA
 
         Inputs:
             - image: a WxHxB image, with width W, height H and B bands
