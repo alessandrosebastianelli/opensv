@@ -21,7 +21,6 @@ def pixel_clustering(img, n_clusters = 3):
             - cliusted: clustered pixels
     '''
     
-
     image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
     kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(image_2D)
     cliusted = np.array(kmeans.labels_).reshape(img.shape[0], img.shape[1])
