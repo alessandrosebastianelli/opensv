@@ -32,7 +32,7 @@ def load(path):
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
     
     
-    if path==None:
+    if path is None:
         path = get_path_gui()
     
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):

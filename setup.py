@@ -25,6 +25,7 @@ setup(
                        'cartopy==0.20.1.dev139+gc5247d5',
                        'mayavi==4.7.4',
                        'opencv-python==4.6.0.66',
-                       'pyproj==3.3.1'
+                       'pyproj==3.3.1',
+                        'tqdm==4.64.0'
                        ]
 )
