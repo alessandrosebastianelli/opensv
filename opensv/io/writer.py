@@ -7,7 +7,7 @@ Created on Sun Jun 26 17:49:04 2022
 """
 
 
-def save(image, path, srcimage=None):
+def save(image, path, meta):
     '''
 
         Save an image and its metadata given its path
@@ -15,7 +15,7 @@ def save(image, path, srcimage=None):
         Inputs:
             - image: the image to be saved
             - path: position of the image
-            - srcimage (optional): source image, used to copy metdata and CRS, must be a rasterio object
+            - meta: metadata for the image to be saved
     '''
 
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff']
@@ -24,17 +24,13 @@ def save(image, path, srcimage=None):
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):
 
         if srcimage!=None:
-            meta = srcimage.meta.copy()
             meta.update({'driver':'GTiff',
                             'width':image.shape[0],
                             'height':image.shape[1],
                             'count':image.shape[2],
-                            'dtype':'float64',
-                            'crs':srcimage.crs, 
-                            'transform':srcimage.transform,
-                            'nodata':0})
+                            'dtype':'float64'})
 
-        with rasterio.open(fp=path, mode='w',**out_meta) as dst:
+        with rasterio.open(fp=path, mode='w',**meta) as dst:
             for count in range(image.shape[2]):
                 dst.write(image[:,:,count], count)
 
