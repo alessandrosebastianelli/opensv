@@ -1,0 +1,40 @@
+package:
+  name: opensv-python
+  version: "0.0.1"
+
+source:
+  path: ./
+
+build:
+  number: 0
+  script: "$PYTHON -m pip install ."
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - numpy
+    - rasterio
+    - scikit-learn
+    - tqdm
+    - matplotlib
+    - scipy
+    - tkinter
+    - mayavi
+    - cartopy
+    - pyproj
+
+test:
+  imports:
+    - opensv-python
+
+about:
+  home: https://github.com/alessandrosebastianelli/opensv/
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: "Python LaTeX Utils."
