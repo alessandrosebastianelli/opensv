@@ -1,31 +1,99 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 26 16:55:51 2022
+import os, pathlib
+from setuptools.command.develop import develop
+from setuptools.command.install import install
+from setuptools.command.sdist import sdist
+from setuptools import setup, find_packages
+from subprocess import check_call
 
-@author: alessandrosebastianelli
-"""
+def readme():
+    """ Generate readme file. """
+    try:
+        with open("./README.md", encoding="utf8") as file:
+            return file.read()
+    except IOError:
+        return ""
 
-from setuptools import find_packages, setup
+# Package 
+HERE = pathlib.Path(__file__).parent
+PACKAGE_NAME  = 'opensv-python'
+VERSION = '0.0.1'
+AUTHOR = 'Alessandro Sebastianelli'
+AUTHOR_EMAIL = 'alessandro.sebastianelli1995@gmail.com'
+URL = 'https://github.com/alessandrosebastianelli/opensv.git'
+
+LICENSE = 'MIT'
+DESCRIPTION = 'OpenSV - Open Satellite Vision'
+LONG_DESCRIPTION = readme()
+LONG_DESC_TYPE = 'text/markdown'
+
+
+INSTALL_REQUIRES = [
+    "numpy",
+    "rasterio",
+    "scikit-learn",
+    "tqdm",
+    "matplotlib",
+    "scipy",
+    "tkinter",
+    "mayavi",
+    "cartopy",
+	"pyproj"
+]
+
+
+def gitcmd_update_submodules():
+	'''	Check if the package is being deployed as a git repository. If so, recursively
+		update all dependencies.
+
+		@returns True if the package is a git repository and the modules were updated.
+			False otherwise.
+	'''
+	if os.path.exists(os.path.join(HERE, '.git')):
+		check_call(['git', 'submodule', 'update', '--init', '--recursive'])
+		return True
+
+	return False
+
+
+class gitcmd_develop(develop):
+	'''	Specialized packaging class that runs git submodule update --init --recursive
+		as part of the update/install procedure.
+	'''
+	def run(self):
+		gitcmd_update_submodules()
+		develop.run(self)
+
+
+class gitcmd_install(install):
+	'''	Specialized packaging class that runs git submodule update --init --recursive
+		as part of the update/install procedure.
+	'''
+	def run(self):
+		gitcmd_update_submodules()
+		install.run(self)
+
+
+class gitcmd_sdist(sdist):
+	'''	Specialized packaging class that runs git submodule update --init --recursive
+		as part of the update/install procedure;.
+	'''
+	def run(self):
+		gitcmd_update_submodules()
+		sdist.run(self)
+
 
 setup(
-    name             = 'opensv',
-    packages         = find_packages(include=['opensv']),
-    version          = '0.0.1',
-    description      = 'Open Satellite Vision',
-    author           = 'Alessandro Sebastianelli',
-    license          = 'MIT',
-    install_requires = [
-                       'numpy==1.21.2',
-                       'matplotlib==3.4.3',
-                       'rasterio==1.2.10',
-                       'scipy==1.7.1',
-                       'basemap==1.3.3',
-                       'scikit-learn==1.0',
-                       'cartopy==0.20.1.dev139+gc5247d5',
-                       'mayavi==4.7.4',
-                       'opencv-python==4.6.0.66',
-                       'pyproj==3.3.1',
-                        'tqdm==4.64.0'
-                       ]
-)
+    cmdclass={
+		'develop': gitcmd_develop, 
+		'install': gitcmd_install, 
+		'sdist': gitcmd_sdist,
+	}, 
+	name=PACKAGE_NAME,
+	version=VERSION,
+	description=DESCRIPTION, 
+	long_description_content_type=LONG_DESC_TYPE,
+	author=AUTHOR, license=LICENSE, 
+	author_email=AUTHOR_EMAIL, 
+	url=URL, 
+	install_requires=INSTALL_REQUIRES,
+	packages=find_packages())
