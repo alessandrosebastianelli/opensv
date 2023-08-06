@@ -2,12 +2,12 @@
 requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "tkinter", "mayavi", "cartopy", "pyproj"]
 
 [project]
-name = "opensv-python"
+name = "pyosv"
 version = "0.0.1"
 authors = [
   { name="Alessandro Sebastianelli", email="alessandro.sebastianelli1995@gmail.com" },
 ]
-description = "Python LaTeX Utils."
+description = "Python Open Satellite Vision"
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"

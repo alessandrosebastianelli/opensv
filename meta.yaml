@@ -1,5 +1,5 @@
 package:
-  name: opensv-python
+  name: pyosv
   version: "0.0.1"
 
 source:
@@ -30,7 +30,7 @@ requirements:
 
 test:
   imports:
-    - opensv-python
+    - pyosv
 
 about:
   home: https://github.com/alessandrosebastianelli/opensv/

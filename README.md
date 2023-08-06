@@ -1,3 +1,5 @@
+### Python Open Satellite Vision
+
 This package contains functionalities to open, process and manipulate satellite data.
 
 ## Documentation

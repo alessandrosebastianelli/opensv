@@ -15,7 +15,7 @@ def readme():
 
 # Package 
 HERE = pathlib.Path(__file__).parent
-PACKAGE_NAME  = 'opensv-python'
+PACKAGE_NAME  = 'pyosv'
 VERSION = '0.0.1'
 AUTHOR = 'Alessandro Sebastianelli'
 AUTHOR_EMAIL = 'alessandro.sebastianelli1995@gmail.com'
