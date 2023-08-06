@@ -3,3 +3,9 @@
 __pycache__
 .DS_Store
 .idea
+.eggs
+.pytest_cache
+pytexutils.egg-info
+build
+dist
+tmp
