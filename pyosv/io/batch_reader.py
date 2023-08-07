@@ -5,7 +5,7 @@ import numpy as np
 import rasterio
 
 
-def load(path : str, patch_shape : tuple[int,int] = (64,64)) -> np.ndarray:
+def load(path : str, patch_shape : tuple = (64,64)) -> np.ndarray:
     '''
         Load an image patch by patch
 
