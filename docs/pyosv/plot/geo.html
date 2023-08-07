@@ -115,39 +115,6 @@
 </span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="c1"># Set limits</span>
 </span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">map_extent</span><span class="p">)</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">def geo_plot_old(image, lat, lon):</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">    </span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="sd">    #m = Basemap(projection=&#39;merc&#39;, llcrnrlon=bounds[1], llcrnrlat=bounds[0],</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">    #            urcrnrlon=bounds[3], urcrnrlat=bounds[2], resolution=&#39;h&#39;)</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="sd">    </span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a><span class="sd">    m = Basemap(projection=&#39;merc&#39;,</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="sd">        llcrnrlon=lon.min(), llcrnrlat=lat.min(),</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a><span class="sd">        urcrnrlon=lon.max(), urcrnrlat=lat.max(), </span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">        resolution=&quot;h&quot;)</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">    </span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="sd">    #m.drawcountries() </span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">    </span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">    #m.drawstates()</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">    </span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">    </span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="sd">    #extent = [bounds[1], bounds[0], bounds[3], bounds[2]]</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a><span class="sd">    </span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a><span class="sd">    #print(image[:,:-3,0].min(), image[:,:-3,0].max(), image[:,:-3,0].mean())</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a><span class="sd">    </span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a><span class="sd">    #m.contourf(lat, lon, image[:,:-3,0].squeeze(), levels = np.linspace(0,5,100))</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a><span class="sd">    m.imshow(image, extent = [lon.min(),lat.min(), lon.min(), lon.max() ], alpha=0.6, aspect=&#39;auto&#39;, origin=&#39;upper&#39;)</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a><span class="sd">    #m.drawcoastlines()</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a><span class="sd">    m.drawcoastlines()</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a><span class="sd">    #m.drawmeridians()</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a><span class="sd">    #m.drawparallels()</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a><span class="sd">    </span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a><span class="sd">    plt.show()</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a><span class="sd">  &#39;&#39;&#39;</span> 
-</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos">89</span></a>    
 </span></pre></div>
 
 
