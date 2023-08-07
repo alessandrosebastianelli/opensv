@@ -23,8 +23,6 @@ requirements:
     - tqdm
     - matplotlib
     - scipy
-    - tkinter
-    - mayavi
     - cartopy
     - pyproj
 

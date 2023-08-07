@@ -28,16 +28,16 @@ LONG_DESC_TYPE = 'text/markdown'
 
 
 INSTALL_REQUIRES = [
-    "numpy",
-    "rasterio",
-    "scikit-learn",
-    "tqdm",
-    "matplotlib",
-    "scipy",
-    "tkinter",
-    "mayavi",
-    "cartopy",
-	"pyproj"
+#    "numpy",
+#    "rasterio",
+#    "scikit-learn",
+#    "tqdm",
+#    "matplotlib",
+#    "scipy",
+#    "vtk==9.0.1",
+#    "mayavi",
+#    "cartopy",
+#    "pyproj"
 ]
 
 

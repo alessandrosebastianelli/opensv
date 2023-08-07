@@ -1,5 +1,5 @@
 [build-system]
-requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "tkinter", "mayavi", "cartopy", "pyproj"]
+requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj"]
 
 [project]
 name = "pyosv"
@@ -17,7 +17,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-  "nunpy"
+  "numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj"
 ]
 
 [project.urls]
