@@ -14,7 +14,7 @@ and it is available [here](https://alessandrosebastianelli.github.io/opensv/open
 Move to opensv folder
 
 opensv/  
-├─ opensv-python/  
+├─ pyosv/  
 ├─ tests/  
 ├─ setup.py  
 ├─ LICENSE  
@@ -28,7 +28,7 @@ and run
 
 after building the wheels, you can install the library bu running
 
-```pip install dist/latex_utils-0.0.1-py3-none-any.whl```
+```pip install dist/pyosv-0.0.1-py3-none-any.whl```
 
 **be aware that version (0.0.1) can change**.
 
