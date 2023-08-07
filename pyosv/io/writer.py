@@ -1,28 +1,75 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 26 17:49:04 2022
-
-@author: alessandrosebastianelli
-"""
+from ..utils.paths import get_path_gui
 
 import matplotlib.pyplot as plt
+import numpy as np
 import rasterio
 
 
-def save(image, path, meta):
+def write(image : np.ndarray, path : str, meta : dict) -> None:
     '''
+        Save an image and its metadata given a path.
 
-        Save an image and its metadata given its path
+        Supported data format
 
-        Inputs:
-            - image: the image to be saved
-            - path: position of the image
-            - meta: metadata for the image to be saved
+        RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
+        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+
+        Data must always be in channel last format.
+
+        If image extension is in MATPLOTLIB_EXTENSIONS, metadata can be None.
+
+        Parameters:
+        -----------
+            - image : np.ndarray
+                the WxHxC image to be saved, with W width, H height and B bands (channel last)
+            - path : str 
+                position of the image, if None the function will ask for the image path using a menu
+            - meta : dict
+                metadata for the image to be saved
+        
+        Returns:
+        --------
+        Nothing, the image will be saved
+
+        Usage:
+        ------
+
+        ```python
+        import numpy as np
+
+        img         = np.array(  
+            [[
+                [0.1, 0.2, 0.3],  
+                [0.4, 0.5, 0.6],  
+                [0.7, 0.8, 0.9]
+             ],
+             [
+                [1.1, 1.2, 1.3],  
+                [1.4, 1.5, 1.6],  
+                [1.7, 1.8, 1.9]
+             ]
+            ]  
+        ) 
+
+        # Making channels last
+        img = np.moveaxis(img, 0, -1)
+
+        write(img, 'path/to/save/img.png')
+        
+        ```
+        Output:
+        -------
+        Nothing, the image will be saved
+
+
     '''
 
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff']
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+
+
+    if path is None:
+        path = get_path_gui()
 
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):
 
@@ -41,4 +88,4 @@ def save(image, path, meta):
         plt.imsave(path, image)
 
     else:
-        print('[!] File can not be saved, format not supported!')
+        raise Exception('Error: file can not be saved, format not supported!')
