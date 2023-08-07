@@ -8,7 +8,7 @@ def pixel_clustering(img : np.ndarray, n_clusters : int = 3) -> np.ndarray:
         Parameters:
         -----------
             - img : np.ndarray  
-                a WxHxB image, with width W, height H and B bands
+                a WxHxB image, with width W, height H and B bands (channel last)
             - n_clusters : int  
                 number of cluster to be identified
         
@@ -35,14 +35,24 @@ def pixel_clustering(img : np.ndarray, n_clusters : int = 3) -> np.ndarray:
                 [1.7, 1.8, 1.9]
              ]
             ]  
-        )  
+        ) 
 
-        clusters = pixel_clustering(img, nclusters = 2)
+        img = np.moveaxis(img, 0, -1)
+
+        clusters = pixel_clustering(img, n_clusters = 2)
         ```
         Output:
         ------
+        ``` python
+        array([[0, 0, 0],
+               [0, 0, 1],
+               [1, 1, 1]], dtype=int32)
+       ```
 
     '''
+
+    if len(img.shape) != 3:
+        raise Exception('Error: lenght of image shape must be 3')
     
     image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
     kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(image_2D)
