@@ -35,4 +35,4 @@ after building the wheels, you can install the library bu running
 
 ## Upload to PyPi
 
-```python3 -m twine upload dist/* --verbose ```
+```python3 -m twine upload dist/* --verbose```
