@@ -53,7 +53,7 @@ def pixel_clustering(img : np.ndarray, n_clusters : int = 3) -> np.ndarray:
     '''
 
     if len(img.shape) != 3:
-        raise Exception('Error: lenght of image shape must be 3')
+        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
     
     image_2D = img.reshape(img.shape[0]*img.shape[1], img.shape[2])
     kmeans = KMeans(n_clusters = n_clusters, random_state = 0).fit(image_2D)

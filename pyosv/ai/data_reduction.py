@@ -1,14 +1,14 @@
 from sklearn.decomposition import PCA
 import numpy as np
 
-def image_PCA(image : np.ndarray, n_components : int) -> np.ndarray:
+def image_PCA(img : np.ndarray, n_components : int) -> np.ndarray:
     '''
 
         Reduce the image dimensionality along the channells axis using PCA
 
         Parameters:  
         ----------  
-            - image : np.ndarray
+            - img : np.ndarray
                 a WxHxB image, with width W, height H and B bands (channel last)
             - n_components : int
                 number of bands of the compressed image
@@ -60,27 +60,22 @@ def image_PCA(image : np.ndarray, n_components : int) -> np.ndarray:
 
     '''
 
+    if len(img.shape) != 3:
+        raise Exception('Error: lenght of image shape must be 3 -  (space, space, channels)')
+
     pca = PCA(n_components)
-    reduced = pca.fit_transform(image.reshape((image.shape[0] * image.shape[1], image.shape[2])))
-    reduced = reduced.reshape((image.shape[0], image.shape[1], n_components))
+    reduced = pca.fit_transform(img.reshape((img.shape[0] * img.shape[1], img.shape[2])))
+    reduced = reduced.reshape((img.shape[0], img.shape[1], n_components))
     reduced = np.array(reduced)
 
     return reduced
 
 
-def image_stack_PCA(images, n_components):
+def image_stack_PCA(imgs : np.ndarray, n_components : int) -> np.ndarray:
     '''
-
-        !!!To be implemented!!!
-
         Reduce a temporal stack of images along the temporal axis
-
-        Inputs:
-            - images: a TxWxHxB stack of images, with T temporal length, width W, height H and B bands
-            - n_components: number of bands of the compressed image
-        Output:
-            - reduced: the n_componentsxWxHxB compressed image, n_components temporal length, with width W, height H and B bands
-
     '''
-
+    if len(imgs.shape) != 4:
+        raise Exception('Error: lenght of imgs shape must be 4 - (space, space, channels, time)')
+    
     pass
