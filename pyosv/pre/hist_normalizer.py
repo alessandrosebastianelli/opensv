@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul  1 16:07:47 2022
-
-@author: alessandrosebastianelli
-"""
-
 from ..utils.mapper import mapFromTo
 
 

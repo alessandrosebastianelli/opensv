@@ -1,13 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 28 10:52:26 2022
-
-@author: alessandrosebastianelli
-"""
-
 from ..pre.normalized_difference import normalized_difference
-
 
 def ndvi(image, red_index=3, nir_index=7):
     '''

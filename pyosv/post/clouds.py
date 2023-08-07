@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 27 16:02:38 2022
-
-@author: alessandrosebastianelli
-"""
-
 from ..pre.normalized_difference import normalized_difference
 from ..pre.normalizer import minmax_scaler
 

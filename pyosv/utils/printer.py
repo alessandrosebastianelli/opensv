@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jun 25 20:19:40 2022
-
-@author: alessandrosebastianelli
-"""
-
 import numpy as np
 
 def dict_disp(dict):

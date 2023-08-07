@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 27 16:03:45 2022
-
-@author: alessandrosebastianelli
-"""
-
 def normalized_difference(channel_1, channel_2):
     
     '''

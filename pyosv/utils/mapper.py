@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul  1 18:03:26 2022
-
-@author: alessandrosebastianelli
-"""
-
 def mapFromTo(x, a, b, c, d):
     '''
         Map x from range a,b to range c,d

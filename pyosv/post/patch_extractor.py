@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jul 7 16:16:42 2022
-
-@author: alessandrosebastianelli
-"""
-
 import numpy as np
 
 def patch_extractor(image, shape=(64, 64), stride=(1, 1)):

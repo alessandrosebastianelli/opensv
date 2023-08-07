@@ -54,36 +54,3 @@ def geo_plot(img, meta, bounds):
     # Set limits
     ax.set_extent(map_extent)
     plt.show()
-
-
-'''
-def geo_plot_old(image, lat, lon):
-    
-    #m = Basemap(projection='merc', llcrnrlon=bounds[1], llcrnrlat=bounds[0],
-    #            urcrnrlon=bounds[3], urcrnrlat=bounds[2], resolution='h')
-    
-    m = Basemap(projection='merc',
-        llcrnrlon=lon.min(), llcrnrlat=lat.min(),
-        urcrnrlon=lon.max(), urcrnrlat=lat.max(), 
-        resolution="h")
-    
-    #m.drawcountries() 
-    
-    #m.drawstates()
-    
-    
-    #extent = [bounds[1], bounds[0], bounds[3], bounds[2]]
-    
-    #print(image[:,:-3,0].min(), image[:,:-3,0].max(), image[:,:-3,0].mean())
-    
-    #m.contourf(lat, lon, image[:,:-3,0].squeeze(), levels = np.linspace(0,5,100))
-    m.imshow(image, extent = [lon.min(),lat.min(), lon.min(), lon.max() ], alpha=0.6, aspect='auto', origin='upper')
-    #m.drawcoastlines()
-    m.drawcoastlines()
-    #m.drawmeridians()
-    #m.drawparallels()
-    
-    plt.show()
-  ''' 
-
-    

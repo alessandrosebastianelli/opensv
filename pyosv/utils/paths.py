@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 26 17:40:15 2022
-
-@author: alessandrosebastianelli
-"""
-
-
 from tkinter.filedialog import askopenfilename
 from tkinter import Tk
 

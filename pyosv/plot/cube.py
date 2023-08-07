@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 5 14:01:04 2022
-
-@author: alessandrosebastianelli
-"""
-
 from mayavi import mlab
 
 def plot3d(image, animate = False):
