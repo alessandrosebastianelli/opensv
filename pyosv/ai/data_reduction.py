@@ -45,7 +45,7 @@ def image_PCA(img : np.ndarray, n_components : int) -> np.ndarray:
         ```
         Output:
         ------
-        ``` python
+        ```
         array([
               [[ 0.56568542],
                 [ 0.42426407],

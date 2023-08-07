@@ -44,7 +44,7 @@ def pixel_clustering(img : np.ndarray, n_clusters : int = 3) -> np.ndarray:
         ```
         Output:
         ------
-        ``` python
+        ```
         array([[0, 0, 0],
                [0, 0, 1],
                [1, 1, 1]], dtype=int32)
