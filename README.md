@@ -7,7 +7,7 @@ The documentation has been produced using [pdoc](https://pdoc.dev).
 
 ```python build_doc.py```
 
-and it is available [here](https://alessandrosebastianelli.github.io/opensv/opensv-python.html).
+and it is available [here](https://alessandrosebastianelli.github.io/opensv/pyosv.html).
 
 ## Build and install the package
 
