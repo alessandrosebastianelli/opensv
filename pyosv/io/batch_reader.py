@@ -1,30 +1,92 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 14 16:28:06 2022
-
-@author: alessandrosebastianelli
-"""
-
 from ..utils.paths import get_path_gui
 
 from rasterio.windows import Window
-import matplotlib.pyplot as plt
-from tqdm import tqdm
 import numpy as np
 import rasterio
 
 
-def load(path, shape=256):
+def load(path : str, patch_shape : tuple[int,int] = (64,64)) -> np.ndarray:
     '''
+        Load an image patch by patch
 
-        Load an image and its metadata given its path
+        Supported data format
 
-        Inputs:
-            - path: position of the image, if None the function will ask for the image path using a menu
-        Outputs:
-            - data: WxHxB image, with W width, H height and B bands
-            - metadata: dictionary containing image metadata
+        RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
+        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+
+        Returns always data in channel last format.
+
+        If image extension is in MATPLOTLIB_EXTENSIONS, metadata and bound will be None.
+        
+        Parameters:
+        -----------
+            - path : str
+                position of the image, if None the function will ask for the image path using a menu
+            - patch_shape :  tuple[int,int]
+                tuple of two integers representing the size of the patches to be loaded from the image
+
+        Returns:
+        --------
+            - data : np.ndarray
+                patch_shape[0]xpatch_shape[1]xB image patch, with patch_shape[0] width, patch_shape[1] height and B bands
+        
+        Usage:
+        ------
+        ```python
+            iterator = iter(
+                load(None, patch_size = (64,64))
+                )
+
+                patch = next(iterator) 
+        ``` 
+        or
+        ```python
+            img = iter(
+                load("path/to/image.png")
+                )
+            patch = next(iterator) 
+
+        ``` 
+
+        Output:
+        -------
+        ```
+        P1:
+
+            array([[[5872., 5532., 5516., ...,    0.,    0., 1024.],  
+                    [5872., 5588., 5451., ...,    0.,    0., 1024.],  
+                    [5872., 5606., 5333., ...,    0.,    0., 1024.],  
+                    ...,  
+                    [2672., 2602., 2368., ...,    0.,    0., 1024.],  
+                    [2672., 2689., 2394., ...,    0.,    0., 1024.],  
+                    [2672., 2705., 2431., ...,    0.,    0., 1024.]],  
+                    ...,  
+                    [[1571., 1318., 1167., ...,    0.,    0.,    0.],  
+                    [1571., 1206., 1113., ...,    0.,    0.,    0.],  
+                    [1571., 1230., 1094., ...,    0.,    0.,    0.],  
+                    ...,  
+                    [1330., 1044.,  837., ...,    0.,    0.,    0.],  
+                    [1330., 1045.,  842., ...,    0.,    0.,    0.],  
+                    [1330., 1032.,  833., ...,    0.,    0.,    0.]]])
+        
+        P2:
+            array([[[1015.,  741.,  673., ...,    0.,    0.,    0.],  
+                    [1015.,  729.,  676., ...,    0.,    0.,    0.],  
+                    [1015.,  757.,  670., ...,    0.,    0.,    0.],  
+                    ...,  
+                    [1039.,  764.,  692., ...,    0.,    0.,    0.],  
+                    [1039.,  752.,  702., ...,    0.,    0.,    0.],  
+                    [1039.,  761.,  736., ...,    0.,    0.,    0.]],  
+                    ...,  
+                    [[1012.,  728.,  630., ...,    0.,    0.,    0.],  
+                    [1012.,  742.,  686., ...,    0.,    0.,    0.],  
+                    [1012.,  754.,  724., ...,    0.,    0.,    0.],  
+                    ...,  
+                    [1033.,  773.,  715., ...,    0.,    0.,    0.],  
+                    [1033.,  768.,  733., ...,    0.,    0.,    0.],  
+                    [1033.,  763.,  745., ...,    0.,    0.,    0.]]])  
+
+        ```
     '''
 
     RASTERIO_EXTENSIONS = ['.tif', '.tiff']
@@ -35,38 +97,14 @@ def load(path, shape=256):
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):
 
         with rasterio.open(path) as src:
-            #data = src.read()
-            w, h = src.width, src.height
-            metadata = src.profile
-            bounds = src.bounds
+            c, w, h = src.read().shape
 
-        out = np.zeros((w, h, 3))
+        for i in range(0, w - patch_shape[0], patch_shape[0]):
+            for j in range(0, h -  patch_shape[1], patch_shape[1]):
 
-        for i in tqdm(range(0, w - shape, shape)):
-            for j in range(0, h - shape, shape):
                 with rasterio.open(path) as src:
-                    data = src.read(window=Window(j, i, shape, shape))
-                    data = np.moveaxis(data, 0, -1)/10000
-                    out[i:i + 256, j:j + 256, 0] = data[:, :, 4]
-                    out[i:i + 256, j:j + 256, 1] = data[:, :, 3]
-                    out[i:i + 256, j:j + 256, 2] = data[:, :, 2]
-
-        fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(50, 50))
-        ax.imshow(out)
-        ax.axis(False)
-        plt.show()
-
-        p = path.split('.')[0] + '.png'
-        print(p)
-        plt.savefig(p)
-
-        plt.close()
-
-
+                    data = src.read(window=Window(j, i, patch_shape[1], patch_shape[0]))
+                    data = np.moveaxis(data, 0, -1)
+                yield data
     else:
-        data = None
-        metadata = None
-        bounds = None
-        print('[!] File can not be opened, format not supported!')
-
-    return data, metadata, bounds
+        raise Exception('Error: file can not be opened or format not supported!')
