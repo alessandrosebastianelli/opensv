@@ -24,7 +24,7 @@ opensv/
 
 and run
 
-```python setup.py sdist bdist_wheel```
+```python build_dist.py```
 
 after building the wheels, you can install the library bu running
 
