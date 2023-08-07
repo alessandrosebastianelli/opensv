@@ -53,76 +53,149 @@
                     <h1 class="modulename">
 <a href="./../../pyosv.html">pyosv</a><wbr>.<a href="./../freq.html">freq</a><wbr>.filters    </h1>
 
-                        <div class="docstring"><p>Created on Fri Jul  1 14:58:11 2022</p>
-
-<p>@author: alessandrosebastianelli</p>
-</div>
-
+                
                         <input id="mod-filters-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-filters-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="ch">#!/usr/bin/env python3</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="c1"># -*- coding: utf-8 -*-</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">Created on Fri Jul  1 14:58:11 2022</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">@author: alessandrosebastianelli</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="k">def</span> <span class="nf">gaussian_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">my</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">    </span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        Apply a 2D gaussian filter to the input spectrum</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">        </span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Inputs:</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">            - fft: 2D spectrum to be filtered</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">            - mx (my) (optional): mean</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">            - sx (sy) (optional): standard deviation</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="sd">            - invert  (optional): invert the distribution</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">        Outputs:</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">            - filt: filtered spectrum</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sx</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">my</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sy</span><span class="o">**</span><span class="mf">2.</span><span class="p">)))</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">filt</span> <span class="o">=</span> <span class="n">fft</span><span class="o">*</span><span class="n">fxy</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="k">return</span> <span class="n">filt</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="k">def</span> <span class="nf">lhp_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">    </span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        Apply a low pass or high pass filter to the input spectrum</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        </span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        Inputs:</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">            - fft: 2D spectrum to be filtered</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">            - radius: size of the  filter [0-1]</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">            - invert  (optional): invert the distribution</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="sd">        Outputs:</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="sd">            - fft: filtered spectrum</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="n">fft</span><span class="p">[</span><span class="n">fxy</span><span class="o">&lt;</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="k">return</span> <span class="n">fft</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="k">def</span> <span class="nf">gaussian_filter</span><span class="p">(</span><span class="n">fft</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mx</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">my</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sx</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sy</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">invert</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="sd">        Apply a 2D gaussian filter to the input 2D spectrum</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="sd">        </span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="sd">        Prameters:</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="sd">        ---------</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="sd">            - fft : np.ndarray </span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="sd">                2D spectrum to be filtered</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="sd">            - mx : int </span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">                mean of gaussian x function (default : 0)</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="sd">            - my : int</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="sd">                mean of gaussian y function (default : 0)</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="sd">            - sx : int</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">                standard deviation of gaussian x function (default : 1)</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="sd">            = sy : int</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a><span class="sd">                standard deviation of gaussian y function (default : 1)</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a><span class="sd">            - invert : bool</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a><span class="sd">                invert the distribution (default : False)</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a><span class="sd">        </span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a><span class="sd">        Returns:</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a><span class="sd">        --------</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a><span class="sd">            - filt : np.ndarray</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a><span class="sd">                filtered spectrum</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a><span class="sd">        </span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a><span class="sd">        Usage:</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a><span class="sd">        ------</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a><span class="sd">        ```python</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a><span class="sd">        import numpy as np</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a><span class="sd">        fft = np.array(</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a><span class="sd">            [</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">            [1,   1, 1,   1,1],</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">            ]</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">        )</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">        filt = gaussian_filter(fft, mx=0, my=0, sx=1, sy=1, invert=False)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        ```</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">        Output:</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">        -------</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">        ```</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">        array([  </span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">            [0.        , 0.        , 0.09653235, 0.        , 0.        ],  </span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">            [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  </span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">            [0.09653235, 0.14045374, 0.15915494, 0.14045374, 0.09653235],  </span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">            [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  </span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="sd">            [0.        , 0.        , 0.09653235, 0.        , 0.        ]])  </span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">        ```</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: the shape of fft must be greater than 2&quot;</span><span class="p">)</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>    
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sx</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">my</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sy</span><span class="o">**</span><span class="mf">2.</span><span class="p">)))</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>    <span class="n">filt</span> <span class="o">=</span> <span class="n">fft</span><span class="o">*</span><span class="n">fxy</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>    
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>    <span class="k">return</span> <span class="n">filt</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="k">def</span> <span class="nf">lhp_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        Apply a low pass or high pass filter to the input 2D spectrum</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="sd">        </span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">        Parameters:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">        -----------</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">            - fft : np.ndarray</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a><span class="sd">                2D spectrum to be filtered</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a><span class="sd">            - radius : int</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a><span class="sd">                size of the filter, ammited range [0-1], will mask to zero fft values lower than radius (default : 0.5)</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="sd">            - invert: bool</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">                invert the distribution (default : False)</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">        Returns:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        --------</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">            - fft : np.ndarray</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">                filtered spectrum</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="sd">        </span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        Usage:</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="sd">        ------</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        ```python</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">        import numpy as np</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="sd">        fft = np.array(</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="sd">            [</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a><span class="sd">            [1,   1, 1,   1,1],</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="sd">            ]</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a><span class="sd">        )</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        filt = lhp_filter(fft, radius=0.8, invert=False)</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">        ```</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">        Output:</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">        -------</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">        ```</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">        array([  </span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="sd">            [0., 0., 1., 0., 0.],  </span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">            [0., 0., 0., 0., 0.],  </span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">            [1., 0., 0., 0., 1.],  </span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">            [0., 0., 0., 0., 0.],  </span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a><span class="sd">            [0., 0., 1., 0., 0.]])  </span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a><span class="sd">        ```</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: the shape of fft must be greater than 2&quot;</span><span class="p">)</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>    
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>    <span class="n">fft</span><span class="p">[</span><span class="n">fxy</span><span class="o">&lt;</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="k">return</span> <span class="n">fft</span>
 </span></pre></div>
 
 
@@ -132,50 +205,138 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">gaussian_filter</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">fft</span>, </span><span class="param"><span class="n">mx</span><span class="o">=</span><span class="mi">0</span>, </span><span class="param"><span class="n">my</span><span class="o">=</span><span class="mi">0</span>, </span><span class="param"><span class="n">sx</span><span class="o">=</span><span class="mi">1</span>, </span><span class="param"><span class="n">sy</span><span class="o">=</span><span class="mi">1</span>, </span><span class="param"><span class="n">invert</span><span class="o">=</span><span class="kc">False</span></span><span class="return-annotation">):</span></span>
+        <span class="name">gaussian_filter</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">fft</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>,</span><span class="param">	<span class="n">mx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>,</span><span class="param">	<span class="n">my</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>,</span><span class="param">	<span class="n">sx</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>,</span><span class="param">	<span class="n">sy</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>,</span><span class="param">	<span class="n">invert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>:</span></span>
 
                 <label class="view-source-button" for="gaussian_filter-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#gaussian_filter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="gaussian_filter-12"><a href="#gaussian_filter-12"><span class="linenos">12</span></a><span class="k">def</span> <span class="nf">gaussian_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">my</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="gaussian_filter-13"><a href="#gaussian_filter-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="gaussian_filter-14"><a href="#gaussian_filter-14"><span class="linenos">14</span></a><span class="sd">    </span>
-</span><span id="gaussian_filter-15"><a href="#gaussian_filter-15"><span class="linenos">15</span></a><span class="sd">        Apply a 2D gaussian filter to the input spectrum</span>
-</span><span id="gaussian_filter-16"><a href="#gaussian_filter-16"><span class="linenos">16</span></a><span class="sd">        </span>
-</span><span id="gaussian_filter-17"><a href="#gaussian_filter-17"><span class="linenos">17</span></a><span class="sd">        Inputs:</span>
-</span><span id="gaussian_filter-18"><a href="#gaussian_filter-18"><span class="linenos">18</span></a><span class="sd">            - fft: 2D spectrum to be filtered</span>
-</span><span id="gaussian_filter-19"><a href="#gaussian_filter-19"><span class="linenos">19</span></a><span class="sd">            - mx (my) (optional): mean</span>
-</span><span id="gaussian_filter-20"><a href="#gaussian_filter-20"><span class="linenos">20</span></a><span class="sd">            - sx (sy) (optional): standard deviation</span>
-</span><span id="gaussian_filter-21"><a href="#gaussian_filter-21"><span class="linenos">21</span></a><span class="sd">            - invert  (optional): invert the distribution</span>
-</span><span id="gaussian_filter-22"><a href="#gaussian_filter-22"><span class="linenos">22</span></a><span class="sd">        Outputs:</span>
-</span><span id="gaussian_filter-23"><a href="#gaussian_filter-23"><span class="linenos">23</span></a><span class="sd">            - filt: filtered spectrum</span>
-</span><span id="gaussian_filter-24"><a href="#gaussian_filter-24"><span class="linenos">24</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="gaussian_filter-25"><a href="#gaussian_filter-25"><span class="linenos">25</span></a>    
-</span><span id="gaussian_filter-26"><a href="#gaussian_filter-26"><span class="linenos">26</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="gaussian_filter-27"><a href="#gaussian_filter-27"><span class="linenos">27</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="gaussian_filter-28"><a href="#gaussian_filter-28"><span class="linenos">28</span></a>    
-</span><span id="gaussian_filter-29"><a href="#gaussian_filter-29"><span class="linenos">29</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span id="gaussian_filter-30"><a href="#gaussian_filter-30"><span class="linenos">30</span></a>
-</span><span id="gaussian_filter-31"><a href="#gaussian_filter-31"><span class="linenos">31</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sx</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">my</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sy</span><span class="o">**</span><span class="mf">2.</span><span class="p">)))</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="gaussian_filter-4"><a href="#gaussian_filter-4"><span class="linenos"> 4</span></a><span class="k">def</span> <span class="nf">gaussian_filter</span><span class="p">(</span><span class="n">fft</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mx</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">my</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sx</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sy</span> <span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">invert</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span><span id="gaussian_filter-5"><a href="#gaussian_filter-5"><span class="linenos"> 5</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="gaussian_filter-6"><a href="#gaussian_filter-6"><span class="linenos"> 6</span></a><span class="sd">        Apply a 2D gaussian filter to the input 2D spectrum</span>
+</span><span id="gaussian_filter-7"><a href="#gaussian_filter-7"><span class="linenos"> 7</span></a><span class="sd">        </span>
+</span><span id="gaussian_filter-8"><a href="#gaussian_filter-8"><span class="linenos"> 8</span></a><span class="sd">        Prameters:</span>
+</span><span id="gaussian_filter-9"><a href="#gaussian_filter-9"><span class="linenos"> 9</span></a><span class="sd">        ---------</span>
+</span><span id="gaussian_filter-10"><a href="#gaussian_filter-10"><span class="linenos">10</span></a><span class="sd">            - fft : np.ndarray </span>
+</span><span id="gaussian_filter-11"><a href="#gaussian_filter-11"><span class="linenos">11</span></a><span class="sd">                2D spectrum to be filtered</span>
+</span><span id="gaussian_filter-12"><a href="#gaussian_filter-12"><span class="linenos">12</span></a><span class="sd">            - mx : int </span>
+</span><span id="gaussian_filter-13"><a href="#gaussian_filter-13"><span class="linenos">13</span></a><span class="sd">                mean of gaussian x function (default : 0)</span>
+</span><span id="gaussian_filter-14"><a href="#gaussian_filter-14"><span class="linenos">14</span></a><span class="sd">            - my : int</span>
+</span><span id="gaussian_filter-15"><a href="#gaussian_filter-15"><span class="linenos">15</span></a><span class="sd">                mean of gaussian y function (default : 0)</span>
+</span><span id="gaussian_filter-16"><a href="#gaussian_filter-16"><span class="linenos">16</span></a><span class="sd">            - sx : int</span>
+</span><span id="gaussian_filter-17"><a href="#gaussian_filter-17"><span class="linenos">17</span></a><span class="sd">                standard deviation of gaussian x function (default : 1)</span>
+</span><span id="gaussian_filter-18"><a href="#gaussian_filter-18"><span class="linenos">18</span></a><span class="sd">            = sy : int</span>
+</span><span id="gaussian_filter-19"><a href="#gaussian_filter-19"><span class="linenos">19</span></a><span class="sd">                standard deviation of gaussian y function (default : 1)</span>
+</span><span id="gaussian_filter-20"><a href="#gaussian_filter-20"><span class="linenos">20</span></a><span class="sd">            - invert : bool</span>
+</span><span id="gaussian_filter-21"><a href="#gaussian_filter-21"><span class="linenos">21</span></a><span class="sd">                invert the distribution (default : False)</span>
+</span><span id="gaussian_filter-22"><a href="#gaussian_filter-22"><span class="linenos">22</span></a><span class="sd">        </span>
+</span><span id="gaussian_filter-23"><a href="#gaussian_filter-23"><span class="linenos">23</span></a><span class="sd">        Returns:</span>
+</span><span id="gaussian_filter-24"><a href="#gaussian_filter-24"><span class="linenos">24</span></a><span class="sd">        --------</span>
+</span><span id="gaussian_filter-25"><a href="#gaussian_filter-25"><span class="linenos">25</span></a><span class="sd">            - filt : np.ndarray</span>
+</span><span id="gaussian_filter-26"><a href="#gaussian_filter-26"><span class="linenos">26</span></a><span class="sd">                filtered spectrum</span>
+</span><span id="gaussian_filter-27"><a href="#gaussian_filter-27"><span class="linenos">27</span></a><span class="sd">        </span>
+</span><span id="gaussian_filter-28"><a href="#gaussian_filter-28"><span class="linenos">28</span></a><span class="sd">        Usage:</span>
+</span><span id="gaussian_filter-29"><a href="#gaussian_filter-29"><span class="linenos">29</span></a><span class="sd">        ------</span>
+</span><span id="gaussian_filter-30"><a href="#gaussian_filter-30"><span class="linenos">30</span></a><span class="sd">        ```python</span>
+</span><span id="gaussian_filter-31"><a href="#gaussian_filter-31"><span class="linenos">31</span></a><span class="sd">        import numpy as np</span>
 </span><span id="gaussian_filter-32"><a href="#gaussian_filter-32"><span class="linenos">32</span></a>
-</span><span id="gaussian_filter-33"><a href="#gaussian_filter-33"><span class="linenos">33</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
-</span><span id="gaussian_filter-34"><a href="#gaussian_filter-34"><span class="linenos">34</span></a>    
-</span><span id="gaussian_filter-35"><a href="#gaussian_filter-35"><span class="linenos">35</span></a>    <span class="n">filt</span> <span class="o">=</span> <span class="n">fft</span><span class="o">*</span><span class="n">fxy</span>
-</span><span id="gaussian_filter-36"><a href="#gaussian_filter-36"><span class="linenos">36</span></a>    
-</span><span id="gaussian_filter-37"><a href="#gaussian_filter-37"><span class="linenos">37</span></a>    <span class="k">return</span> <span class="n">filt</span>
+</span><span id="gaussian_filter-33"><a href="#gaussian_filter-33"><span class="linenos">33</span></a><span class="sd">        fft = np.array(</span>
+</span><span id="gaussian_filter-34"><a href="#gaussian_filter-34"><span class="linenos">34</span></a><span class="sd">            [</span>
+</span><span id="gaussian_filter-35"><a href="#gaussian_filter-35"><span class="linenos">35</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="gaussian_filter-36"><a href="#gaussian_filter-36"><span class="linenos">36</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="gaussian_filter-37"><a href="#gaussian_filter-37"><span class="linenos">37</span></a><span class="sd">            [1,   1, 1,   1,1],</span>
+</span><span id="gaussian_filter-38"><a href="#gaussian_filter-38"><span class="linenos">38</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="gaussian_filter-39"><a href="#gaussian_filter-39"><span class="linenos">39</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="gaussian_filter-40"><a href="#gaussian_filter-40"><span class="linenos">40</span></a><span class="sd">            ]</span>
+</span><span id="gaussian_filter-41"><a href="#gaussian_filter-41"><span class="linenos">41</span></a>
+</span><span id="gaussian_filter-42"><a href="#gaussian_filter-42"><span class="linenos">42</span></a><span class="sd">        )</span>
+</span><span id="gaussian_filter-43"><a href="#gaussian_filter-43"><span class="linenos">43</span></a>
+</span><span id="gaussian_filter-44"><a href="#gaussian_filter-44"><span class="linenos">44</span></a><span class="sd">        filt = gaussian_filter(fft, mx=0, my=0, sx=1, sy=1, invert=False)</span>
+</span><span id="gaussian_filter-45"><a href="#gaussian_filter-45"><span class="linenos">45</span></a><span class="sd">        ```</span>
+</span><span id="gaussian_filter-46"><a href="#gaussian_filter-46"><span class="linenos">46</span></a>
+</span><span id="gaussian_filter-47"><a href="#gaussian_filter-47"><span class="linenos">47</span></a><span class="sd">        Output:</span>
+</span><span id="gaussian_filter-48"><a href="#gaussian_filter-48"><span class="linenos">48</span></a><span class="sd">        -------</span>
+</span><span id="gaussian_filter-49"><a href="#gaussian_filter-49"><span class="linenos">49</span></a><span class="sd">        ```</span>
+</span><span id="gaussian_filter-50"><a href="#gaussian_filter-50"><span class="linenos">50</span></a><span class="sd">        array([  </span>
+</span><span id="gaussian_filter-51"><a href="#gaussian_filter-51"><span class="linenos">51</span></a><span class="sd">            [0.        , 0.        , 0.09653235, 0.        , 0.        ],  </span>
+</span><span id="gaussian_filter-52"><a href="#gaussian_filter-52"><span class="linenos">52</span></a><span class="sd">            [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  </span>
+</span><span id="gaussian_filter-53"><a href="#gaussian_filter-53"><span class="linenos">53</span></a><span class="sd">            [0.09653235, 0.14045374, 0.15915494, 0.14045374, 0.09653235],  </span>
+</span><span id="gaussian_filter-54"><a href="#gaussian_filter-54"><span class="linenos">54</span></a><span class="sd">            [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  </span>
+</span><span id="gaussian_filter-55"><a href="#gaussian_filter-55"><span class="linenos">55</span></a><span class="sd">            [0.        , 0.        , 0.09653235, 0.        , 0.        ]])  </span>
+</span><span id="gaussian_filter-56"><a href="#gaussian_filter-56"><span class="linenos">56</span></a><span class="sd">        ```</span>
+</span><span id="gaussian_filter-57"><a href="#gaussian_filter-57"><span class="linenos">57</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="gaussian_filter-58"><a href="#gaussian_filter-58"><span class="linenos">58</span></a>
+</span><span id="gaussian_filter-59"><a href="#gaussian_filter-59"><span class="linenos">59</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="gaussian_filter-60"><a href="#gaussian_filter-60"><span class="linenos">60</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: the shape of fft must be greater than 2&quot;</span><span class="p">)</span>
+</span><span id="gaussian_filter-61"><a href="#gaussian_filter-61"><span class="linenos">61</span></a>    
+</span><span id="gaussian_filter-62"><a href="#gaussian_filter-62"><span class="linenos">62</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="gaussian_filter-63"><a href="#gaussian_filter-63"><span class="linenos">63</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="gaussian_filter-64"><a href="#gaussian_filter-64"><span class="linenos">64</span></a>    
+</span><span id="gaussian_filter-65"><a href="#gaussian_filter-65"><span class="linenos">65</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span><span id="gaussian_filter-66"><a href="#gaussian_filter-66"><span class="linenos">66</span></a>
+</span><span id="gaussian_filter-67"><a href="#gaussian_filter-67"><span class="linenos">67</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">sx</span> <span class="o">*</span> <span class="n">sy</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mx</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sx</span><span class="o">**</span><span class="mf">2.</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">my</span><span class="p">)</span><span class="o">**</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sy</span><span class="o">**</span><span class="mf">2.</span><span class="p">)))</span>
+</span><span id="gaussian_filter-68"><a href="#gaussian_filter-68"><span class="linenos">68</span></a>
+</span><span id="gaussian_filter-69"><a href="#gaussian_filter-69"><span class="linenos">69</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
+</span><span id="gaussian_filter-70"><a href="#gaussian_filter-70"><span class="linenos">70</span></a>    
+</span><span id="gaussian_filter-71"><a href="#gaussian_filter-71"><span class="linenos">71</span></a>    <span class="n">filt</span> <span class="o">=</span> <span class="n">fft</span><span class="o">*</span><span class="n">fxy</span>
+</span><span id="gaussian_filter-72"><a href="#gaussian_filter-72"><span class="linenos">72</span></a>    
+</span><span id="gaussian_filter-73"><a href="#gaussian_filter-73"><span class="linenos">73</span></a>    <span class="k">return</span> <span class="n">filt</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Apply a 2D gaussian filter to the input spectrum</p>
+            <div class="docstring"><p>Apply a 2D gaussian filter to the input 2D spectrum</p>
 
-<p>Inputs:
-    - fft: 2D spectrum to be filtered
-    - mx (my) (optional): mean
-    - sx (sy) (optional): standard deviation
-    - invert  (optional): invert the distribution
-Outputs:
-    - filt: filtered spectrum</p>
+<h2 id="prameters">Prameters:</h2>
+
+<pre><code>- fft : np.ndarray 
+    2D spectrum to be filtered
+- mx : int 
+    mean of gaussian x function (default : 0)
+- my : int
+    mean of gaussian y function (default : 0)
+- sx : int
+    standard deviation of gaussian x function (default : 1)
+= sy : int
+    standard deviation of gaussian y function (default : 1)
+- invert : bool
+    invert the distribution (default : False)
+</code></pre>
+
+<h2 id="returns">Returns:</h2>
+
+<pre><code>- filt : np.ndarray
+    filtered spectrum
+</code></pre>
+
+<h2 id="usage">Usage:</h2>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">]</span>
+
+<span class="p">)</span>
+
+<span class="n">filt</span> <span class="o">=</span> <span class="n">gaussian_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">my</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sy</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="output">Output:</h2>
+
+<pre><code>array([  
+    [0.        , 0.        , 0.09653235, 0.        , 0.        ],  
+    [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  
+    [0.09653235, 0.14045374, 0.15915494, 0.14045374, 0.09653235],  
+    [0.        , 0.061975  , 0.14045374, 0.061975  , 0.        ],  
+    [0.        , 0.        , 0.09653235, 0.        , 0.        ]])  
+</code></pre>
 </div>
 
 
@@ -191,41 +352,120 @@ Outputs:
 
     </div>
     <a class="headerlink" href="#lhp_filter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="lhp_filter-39"><a href="#lhp_filter-39"><span class="linenos">39</span></a><span class="k">def</span> <span class="nf">lhp_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="lhp_filter-40"><a href="#lhp_filter-40"><span class="linenos">40</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="lhp_filter-41"><a href="#lhp_filter-41"><span class="linenos">41</span></a><span class="sd">    </span>
-</span><span id="lhp_filter-42"><a href="#lhp_filter-42"><span class="linenos">42</span></a><span class="sd">        Apply a low pass or high pass filter to the input spectrum</span>
-</span><span id="lhp_filter-43"><a href="#lhp_filter-43"><span class="linenos">43</span></a><span class="sd">        </span>
-</span><span id="lhp_filter-44"><a href="#lhp_filter-44"><span class="linenos">44</span></a><span class="sd">        Inputs:</span>
-</span><span id="lhp_filter-45"><a href="#lhp_filter-45"><span class="linenos">45</span></a><span class="sd">            - fft: 2D spectrum to be filtered</span>
-</span><span id="lhp_filter-46"><a href="#lhp_filter-46"><span class="linenos">46</span></a><span class="sd">            - radius: size of the  filter [0-1]</span>
-</span><span id="lhp_filter-47"><a href="#lhp_filter-47"><span class="linenos">47</span></a><span class="sd">            - invert  (optional): invert the distribution</span>
-</span><span id="lhp_filter-48"><a href="#lhp_filter-48"><span class="linenos">48</span></a><span class="sd">        Outputs:</span>
-</span><span id="lhp_filter-49"><a href="#lhp_filter-49"><span class="linenos">49</span></a><span class="sd">            - fft: filtered spectrum</span>
-</span><span id="lhp_filter-50"><a href="#lhp_filter-50"><span class="linenos">50</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="lhp_filter-51"><a href="#lhp_filter-51"><span class="linenos">51</span></a>    
-</span><span id="lhp_filter-52"><a href="#lhp_filter-52"><span class="linenos">52</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="lhp_filter-53"><a href="#lhp_filter-53"><span class="linenos">53</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="lhp_filter-54"><a href="#lhp_filter-54"><span class="linenos">54</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span id="lhp_filter-55"><a href="#lhp_filter-55"><span class="linenos">55</span></a>
-</span><span id="lhp_filter-56"><a href="#lhp_filter-56"><span class="linenos">56</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="lhp_filter-57"><a href="#lhp_filter-57"><span class="linenos">57</span></a>
-</span><span id="lhp_filter-58"><a href="#lhp_filter-58"><span class="linenos">58</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
-</span><span id="lhp_filter-59"><a href="#lhp_filter-59"><span class="linenos">59</span></a>
-</span><span id="lhp_filter-60"><a href="#lhp_filter-60"><span class="linenos">60</span></a>    <span class="n">fft</span><span class="p">[</span><span class="n">fxy</span><span class="o">&lt;</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="lhp_filter-61"><a href="#lhp_filter-61"><span class="linenos">61</span></a>    
-</span><span id="lhp_filter-62"><a href="#lhp_filter-62"><span class="linenos">62</span></a>    <span class="k">return</span> <span class="n">fft</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="lhp_filter-76"><a href="#lhp_filter-76"><span class="linenos"> 76</span></a><span class="k">def</span> <span class="nf">lhp_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span id="lhp_filter-77"><a href="#lhp_filter-77"><span class="linenos"> 77</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="lhp_filter-78"><a href="#lhp_filter-78"><span class="linenos"> 78</span></a><span class="sd">        Apply a low pass or high pass filter to the input 2D spectrum</span>
+</span><span id="lhp_filter-79"><a href="#lhp_filter-79"><span class="linenos"> 79</span></a><span class="sd">        </span>
+</span><span id="lhp_filter-80"><a href="#lhp_filter-80"><span class="linenos"> 80</span></a><span class="sd">        Parameters:</span>
+</span><span id="lhp_filter-81"><a href="#lhp_filter-81"><span class="linenos"> 81</span></a><span class="sd">        -----------</span>
+</span><span id="lhp_filter-82"><a href="#lhp_filter-82"><span class="linenos"> 82</span></a><span class="sd">            - fft : np.ndarray</span>
+</span><span id="lhp_filter-83"><a href="#lhp_filter-83"><span class="linenos"> 83</span></a><span class="sd">                2D spectrum to be filtered</span>
+</span><span id="lhp_filter-84"><a href="#lhp_filter-84"><span class="linenos"> 84</span></a><span class="sd">            - radius : int</span>
+</span><span id="lhp_filter-85"><a href="#lhp_filter-85"><span class="linenos"> 85</span></a><span class="sd">                size of the filter, ammited range [0-1], will mask to zero fft values lower than radius (default : 0.5)</span>
+</span><span id="lhp_filter-86"><a href="#lhp_filter-86"><span class="linenos"> 86</span></a><span class="sd">            - invert: bool</span>
+</span><span id="lhp_filter-87"><a href="#lhp_filter-87"><span class="linenos"> 87</span></a><span class="sd">                invert the distribution (default : False)</span>
+</span><span id="lhp_filter-88"><a href="#lhp_filter-88"><span class="linenos"> 88</span></a>
+</span><span id="lhp_filter-89"><a href="#lhp_filter-89"><span class="linenos"> 89</span></a><span class="sd">        Returns:</span>
+</span><span id="lhp_filter-90"><a href="#lhp_filter-90"><span class="linenos"> 90</span></a><span class="sd">        --------</span>
+</span><span id="lhp_filter-91"><a href="#lhp_filter-91"><span class="linenos"> 91</span></a><span class="sd">            - fft : np.ndarray</span>
+</span><span id="lhp_filter-92"><a href="#lhp_filter-92"><span class="linenos"> 92</span></a><span class="sd">                filtered spectrum</span>
+</span><span id="lhp_filter-93"><a href="#lhp_filter-93"><span class="linenos"> 93</span></a>
+</span><span id="lhp_filter-94"><a href="#lhp_filter-94"><span class="linenos"> 94</span></a><span class="sd">        </span>
+</span><span id="lhp_filter-95"><a href="#lhp_filter-95"><span class="linenos"> 95</span></a><span class="sd">        Usage:</span>
+</span><span id="lhp_filter-96"><a href="#lhp_filter-96"><span class="linenos"> 96</span></a><span class="sd">        ------</span>
+</span><span id="lhp_filter-97"><a href="#lhp_filter-97"><span class="linenos"> 97</span></a><span class="sd">        ```python</span>
+</span><span id="lhp_filter-98"><a href="#lhp_filter-98"><span class="linenos"> 98</span></a><span class="sd">        import numpy as np</span>
+</span><span id="lhp_filter-99"><a href="#lhp_filter-99"><span class="linenos"> 99</span></a>
+</span><span id="lhp_filter-100"><a href="#lhp_filter-100"><span class="linenos">100</span></a><span class="sd">        fft = np.array(</span>
+</span><span id="lhp_filter-101"><a href="#lhp_filter-101"><span class="linenos">101</span></a><span class="sd">            [</span>
+</span><span id="lhp_filter-102"><a href="#lhp_filter-102"><span class="linenos">102</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="lhp_filter-103"><a href="#lhp_filter-103"><span class="linenos">103</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="lhp_filter-104"><a href="#lhp_filter-104"><span class="linenos">104</span></a><span class="sd">            [1,   1, 1,   1,1],</span>
+</span><span id="lhp_filter-105"><a href="#lhp_filter-105"><span class="linenos">105</span></a><span class="sd">            [0, 0.5, 1, 0.5,0],</span>
+</span><span id="lhp_filter-106"><a href="#lhp_filter-106"><span class="linenos">106</span></a><span class="sd">            [0,   0, 1,   0,0],</span>
+</span><span id="lhp_filter-107"><a href="#lhp_filter-107"><span class="linenos">107</span></a><span class="sd">            ]</span>
+</span><span id="lhp_filter-108"><a href="#lhp_filter-108"><span class="linenos">108</span></a>
+</span><span id="lhp_filter-109"><a href="#lhp_filter-109"><span class="linenos">109</span></a><span class="sd">        )</span>
+</span><span id="lhp_filter-110"><a href="#lhp_filter-110"><span class="linenos">110</span></a>
+</span><span id="lhp_filter-111"><a href="#lhp_filter-111"><span class="linenos">111</span></a><span class="sd">        filt = lhp_filter(fft, radius=0.8, invert=False)</span>
+</span><span id="lhp_filter-112"><a href="#lhp_filter-112"><span class="linenos">112</span></a><span class="sd">        ```</span>
+</span><span id="lhp_filter-113"><a href="#lhp_filter-113"><span class="linenos">113</span></a>
+</span><span id="lhp_filter-114"><a href="#lhp_filter-114"><span class="linenos">114</span></a><span class="sd">        Output:</span>
+</span><span id="lhp_filter-115"><a href="#lhp_filter-115"><span class="linenos">115</span></a><span class="sd">        -------</span>
+</span><span id="lhp_filter-116"><a href="#lhp_filter-116"><span class="linenos">116</span></a><span class="sd">        ```</span>
+</span><span id="lhp_filter-117"><a href="#lhp_filter-117"><span class="linenos">117</span></a><span class="sd">        array([  </span>
+</span><span id="lhp_filter-118"><a href="#lhp_filter-118"><span class="linenos">118</span></a><span class="sd">            [0., 0., 1., 0., 0.],  </span>
+</span><span id="lhp_filter-119"><a href="#lhp_filter-119"><span class="linenos">119</span></a><span class="sd">            [0., 0., 0., 0., 0.],  </span>
+</span><span id="lhp_filter-120"><a href="#lhp_filter-120"><span class="linenos">120</span></a><span class="sd">            [1., 0., 0., 0., 1.],  </span>
+</span><span id="lhp_filter-121"><a href="#lhp_filter-121"><span class="linenos">121</span></a><span class="sd">            [0., 0., 0., 0., 0.],  </span>
+</span><span id="lhp_filter-122"><a href="#lhp_filter-122"><span class="linenos">122</span></a><span class="sd">            [0., 0., 1., 0., 0.]])  </span>
+</span><span id="lhp_filter-123"><a href="#lhp_filter-123"><span class="linenos">123</span></a><span class="sd">        ```</span>
+</span><span id="lhp_filter-124"><a href="#lhp_filter-124"><span class="linenos">124</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="lhp_filter-125"><a href="#lhp_filter-125"><span class="linenos">125</span></a>    
+</span><span id="lhp_filter-126"><a href="#lhp_filter-126"><span class="linenos">126</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+</span><span id="lhp_filter-127"><a href="#lhp_filter-127"><span class="linenos">127</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Error: the shape of fft must be greater than 2&quot;</span><span class="p">)</span>
+</span><span id="lhp_filter-128"><a href="#lhp_filter-128"><span class="linenos">128</span></a>    
+</span><span id="lhp_filter-129"><a href="#lhp_filter-129"><span class="linenos">129</span></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="lhp_filter-130"><a href="#lhp_filter-130"><span class="linenos">130</span></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fft</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="lhp_filter-131"><a href="#lhp_filter-131"><span class="linenos">131</span></a>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="lhp_filter-132"><a href="#lhp_filter-132"><span class="linenos">132</span></a>
+</span><span id="lhp_filter-133"><a href="#lhp_filter-133"><span class="linenos">133</span></a>    <span class="n">fxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="lhp_filter-134"><a href="#lhp_filter-134"><span class="linenos">134</span></a>
+</span><span id="lhp_filter-135"><a href="#lhp_filter-135"><span class="linenos">135</span></a>    <span class="k">if</span> <span class="n">invert</span><span class="p">:</span> <span class="n">fxy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">fxy</span>
+</span><span id="lhp_filter-136"><a href="#lhp_filter-136"><span class="linenos">136</span></a>
+</span><span id="lhp_filter-137"><a href="#lhp_filter-137"><span class="linenos">137</span></a>    <span class="n">fft</span><span class="p">[</span><span class="n">fxy</span><span class="o">&lt;</span><span class="n">radius</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="lhp_filter-138"><a href="#lhp_filter-138"><span class="linenos">138</span></a>    
+</span><span id="lhp_filter-139"><a href="#lhp_filter-139"><span class="linenos">139</span></a>    <span class="k">return</span> <span class="n">fft</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Apply a low pass or high pass filter to the input spectrum</p>
+            <div class="docstring"><p>Apply a low pass or high pass filter to the input 2D spectrum</p>
 
-<p>Inputs:
-    - fft: 2D spectrum to be filtered
-    - radius: size of the  filter [0-1]
-    - invert  (optional): invert the distribution
-Outputs:
-    - fft: filtered spectrum</p>
+<h2 id="parameters">Parameters:</h2>
+
+<pre><code>- fft : np.ndarray
+    2D spectrum to be filtered
+- radius : int
+    size of the filter, ammited range [0-1], will mask to zero fft values lower than radius (default : 0.5)
+- invert: bool
+    invert the distribution (default : False)
+</code></pre>
+
+<h2 id="returns">Returns:</h2>
+
+<pre><code>- fft : np.ndarray
+    filtered spectrum
+</code></pre>
+
+<h2 id="usage">Usage:</h2>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">fft</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">]</span>
+
+<span class="p">)</span>
+
+<span class="n">filt</span> <span class="o">=</span> <span class="n">lhp_filter</span><span class="p">(</span><span class="n">fft</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="output">Output:</h2>
+
+<pre><code>array([  
+    [0., 0., 1., 0., 0.],  
+    [0., 0., 0., 0., 0.],  
+    [1., 0., 0., 0., 1.],  
+    [0., 0., 0., 0., 0.],  
+    [0., 0., 1., 0., 0.]])  
+</code></pre>
 </div>
 
 
