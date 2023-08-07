@@ -68,7 +68,7 @@
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">        Parameters:</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">        -----------</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">            - img : np.ndarray  </span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">                a WxHxB image, with width W, height H and B bands</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">                a WxHxB image, with width W, height H and B bands (channel last)</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">            - n_clusters : int  </span>
 </span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">                number of cluster to be identified</span>
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        </span>
@@ -95,22 +95,33 @@
 </span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">                [1.7, 1.8, 1.9]</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="sd">             ]</span>
 </span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">            ]  </span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">        )  </span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">        ) </span>
 </span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">        clusters = pixel_clustering(img, nclusters = 2)</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        ```</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        Output:</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        ------</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="n">image_2D</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">image_2D</span><span class="p">)</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>    <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>    <span class="k">return</span> <span class="n">clusters</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">        # Making channels last</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        img = np.moveaxis(img, 0, -1)</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        clusters = pixel_clustering(img, n_clusters = 2)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">        ```</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">        Output:</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">        ------</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="sd">        ```</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="sd">        array([[0, 0, 0],</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="sd">               [0, 0, 1],</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">               [1, 1, 1]], dtype=int32)</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">       ```</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="k">def</span> <span class="nf">conv_clustering</span><span class="p">():</span> <span class="k">pass</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Error: lenght of image shape must be 3 - (space, space, channels)&#39;</span><span class="p">)</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="n">image_2D</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">image_2D</span><span class="p">)</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>    <span class="k">return</span> <span class="n">clusters</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="k">def</span> <span class="nf">conv_clustering</span><span class="p">():</span> <span class="k">pass</span>
 </span></pre></div>
 
 
@@ -133,7 +144,7 @@
 </span><span id="pixel_clustering-9"><a href="#pixel_clustering-9"><span class="linenos"> 9</span></a><span class="sd">        Parameters:</span>
 </span><span id="pixel_clustering-10"><a href="#pixel_clustering-10"><span class="linenos">10</span></a><span class="sd">        -----------</span>
 </span><span id="pixel_clustering-11"><a href="#pixel_clustering-11"><span class="linenos">11</span></a><span class="sd">            - img : np.ndarray  </span>
-</span><span id="pixel_clustering-12"><a href="#pixel_clustering-12"><span class="linenos">12</span></a><span class="sd">                a WxHxB image, with width W, height H and B bands</span>
+</span><span id="pixel_clustering-12"><a href="#pixel_clustering-12"><span class="linenos">12</span></a><span class="sd">                a WxHxB image, with width W, height H and B bands (channel last)</span>
 </span><span id="pixel_clustering-13"><a href="#pixel_clustering-13"><span class="linenos">13</span></a><span class="sd">            - n_clusters : int  </span>
 </span><span id="pixel_clustering-14"><a href="#pixel_clustering-14"><span class="linenos">14</span></a><span class="sd">                number of cluster to be identified</span>
 </span><span id="pixel_clustering-15"><a href="#pixel_clustering-15"><span class="linenos">15</span></a><span class="sd">        </span>
@@ -160,63 +171,91 @@
 </span><span id="pixel_clustering-36"><a href="#pixel_clustering-36"><span class="linenos">36</span></a><span class="sd">                [1.7, 1.8, 1.9]</span>
 </span><span id="pixel_clustering-37"><a href="#pixel_clustering-37"><span class="linenos">37</span></a><span class="sd">             ]</span>
 </span><span id="pixel_clustering-38"><a href="#pixel_clustering-38"><span class="linenos">38</span></a><span class="sd">            ]  </span>
-</span><span id="pixel_clustering-39"><a href="#pixel_clustering-39"><span class="linenos">39</span></a><span class="sd">        )  </span>
+</span><span id="pixel_clustering-39"><a href="#pixel_clustering-39"><span class="linenos">39</span></a><span class="sd">        ) </span>
 </span><span id="pixel_clustering-40"><a href="#pixel_clustering-40"><span class="linenos">40</span></a>
-</span><span id="pixel_clustering-41"><a href="#pixel_clustering-41"><span class="linenos">41</span></a><span class="sd">        clusters = pixel_clustering(img, nclusters = 2)</span>
-</span><span id="pixel_clustering-42"><a href="#pixel_clustering-42"><span class="linenos">42</span></a><span class="sd">        ```</span>
-</span><span id="pixel_clustering-43"><a href="#pixel_clustering-43"><span class="linenos">43</span></a><span class="sd">        Output:</span>
-</span><span id="pixel_clustering-44"><a href="#pixel_clustering-44"><span class="linenos">44</span></a><span class="sd">        ------</span>
-</span><span id="pixel_clustering-45"><a href="#pixel_clustering-45"><span class="linenos">45</span></a>
-</span><span id="pixel_clustering-46"><a href="#pixel_clustering-46"><span class="linenos">46</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="pixel_clustering-47"><a href="#pixel_clustering-47"><span class="linenos">47</span></a>    
-</span><span id="pixel_clustering-48"><a href="#pixel_clustering-48"><span class="linenos">48</span></a>    <span class="n">image_2D</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-</span><span id="pixel_clustering-49"><a href="#pixel_clustering-49"><span class="linenos">49</span></a>    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">image_2D</span><span class="p">)</span>
-</span><span id="pixel_clustering-50"><a href="#pixel_clustering-50"><span class="linenos">50</span></a>    <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="pixel_clustering-51"><a href="#pixel_clustering-51"><span class="linenos">51</span></a>    
-</span><span id="pixel_clustering-52"><a href="#pixel_clustering-52"><span class="linenos">52</span></a>    <span class="k">return</span> <span class="n">clusters</span>
+</span><span id="pixel_clustering-41"><a href="#pixel_clustering-41"><span class="linenos">41</span></a><span class="sd">        # Making channels last</span>
+</span><span id="pixel_clustering-42"><a href="#pixel_clustering-42"><span class="linenos">42</span></a><span class="sd">        img = np.moveaxis(img, 0, -1)</span>
+</span><span id="pixel_clustering-43"><a href="#pixel_clustering-43"><span class="linenos">43</span></a>
+</span><span id="pixel_clustering-44"><a href="#pixel_clustering-44"><span class="linenos">44</span></a><span class="sd">        clusters = pixel_clustering(img, n_clusters = 2)</span>
+</span><span id="pixel_clustering-45"><a href="#pixel_clustering-45"><span class="linenos">45</span></a><span class="sd">        ```</span>
+</span><span id="pixel_clustering-46"><a href="#pixel_clustering-46"><span class="linenos">46</span></a><span class="sd">        Output:</span>
+</span><span id="pixel_clustering-47"><a href="#pixel_clustering-47"><span class="linenos">47</span></a><span class="sd">        ------</span>
+</span><span id="pixel_clustering-48"><a href="#pixel_clustering-48"><span class="linenos">48</span></a><span class="sd">        ```</span>
+</span><span id="pixel_clustering-49"><a href="#pixel_clustering-49"><span class="linenos">49</span></a><span class="sd">        array([[0, 0, 0],</span>
+</span><span id="pixel_clustering-50"><a href="#pixel_clustering-50"><span class="linenos">50</span></a><span class="sd">               [0, 0, 1],</span>
+</span><span id="pixel_clustering-51"><a href="#pixel_clustering-51"><span class="linenos">51</span></a><span class="sd">               [1, 1, 1]], dtype=int32)</span>
+</span><span id="pixel_clustering-52"><a href="#pixel_clustering-52"><span class="linenos">52</span></a><span class="sd">       ```</span>
+</span><span id="pixel_clustering-53"><a href="#pixel_clustering-53"><span class="linenos">53</span></a>
+</span><span id="pixel_clustering-54"><a href="#pixel_clustering-54"><span class="linenos">54</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="pixel_clustering-55"><a href="#pixel_clustering-55"><span class="linenos">55</span></a>
+</span><span id="pixel_clustering-56"><a href="#pixel_clustering-56"><span class="linenos">56</span></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="pixel_clustering-57"><a href="#pixel_clustering-57"><span class="linenos">57</span></a>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Error: lenght of image shape must be 3 - (space, space, channels)&#39;</span><span class="p">)</span>
+</span><span id="pixel_clustering-58"><a href="#pixel_clustering-58"><span class="linenos">58</span></a>    
+</span><span id="pixel_clustering-59"><a href="#pixel_clustering-59"><span class="linenos">59</span></a>    <span class="n">image_2D</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span><span id="pixel_clustering-60"><a href="#pixel_clustering-60"><span class="linenos">60</span></a>    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">image_2D</span><span class="p">)</span>
+</span><span id="pixel_clustering-61"><a href="#pixel_clustering-61"><span class="linenos">61</span></a>    <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="pixel_clustering-62"><a href="#pixel_clustering-62"><span class="linenos">62</span></a>    
+</span><span id="pixel_clustering-63"><a href="#pixel_clustering-63"><span class="linenos">63</span></a>    <span class="k">return</span> <span class="n">clusters</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Image pixel clustering using Support Vector machine</p>
 
-<h2 id="parameters">Parameters:</h2>
+<p>Parameters:</p>
 
-<pre><code>- img : np.ndarray  
-    a WxHxB image, with width W, height H and B bands
-- n_clusters : int  
-    number of cluster to be identified
+<hr />
+
+<pre><code> - img : np.ndarray  
+     a WxHxB image, with width W, height H and B bands (channel last)
+ - n_clusters : int  
+     number of cluster to be identified
 </code></pre>
 
-<h2 id="returns">Returns:</h2>
+<p>Returns:</p>
 
-<pre><code>- clusters : np.ndarray  
-    clustered pixels
+<hr />
+
+<pre><code> - clusters : np.ndarray  
+     clustered pixels
 </code></pre>
 
-<h2 id="usage">Usage:</h2>
+<p>Usage:</p>
 
-<div class="pdoc-code codehilite">
-<pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>  
+<hr />
 
-<span class="n">img</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>  
-    <span class="p">[[</span>
-        <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>  
-        <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>  
-        <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
-     <span class="p">],</span>
-     <span class="p">[</span>
-        <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span>  
-        <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">],</span>  
-        <span class="p">[</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">]</span>
-     <span class="p">]</span>
-    <span class="p">]</span>  
-<span class="p">)</span>  
+<p><div class="pdoc-code codehilite">
+ <pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <br />
+ 
+ <span class="n">img</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <br />
+     <span class="p">[[</span>
+         <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <br />
+         <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span> <br />
+         <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
+         <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <br />
+         <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">],</span> <br />
+         <span class="p">[</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">]</span>
+      <span class="p">]</span>
+     <span class="p">]</span> <br />
+ <span class="p">)</span> 
+ 
+ <span class="c1"># Making channels last</span>
+ <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+ 
+ <span class="n">clusters</span> <span class="o">=</span> <span class="n">pixel_clustering</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+ </code></pre>
+ </div></p>
 
-<span class="n">clusters</span> <span class="o">=</span> <span class="n">pixel_clustering</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">nclusters</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-</code></pre>
-</div>
+<p>Output:</p>
 
-<h2 id="output">Output:</h2>
+<hr />
+
+<p><code>
+ array([[0, 0, 0],
+        [0, 0, 1],
+        [1, 1, 1]], dtype=int32)
+</code></p>
 </div>
 
 
@@ -232,7 +271,7 @@
 
     </div>
     <a class="headerlink" href="#conv_clustering"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="conv_clustering-54"><a href="#conv_clustering-54"><span class="linenos">54</span></a><span class="k">def</span> <span class="nf">conv_clustering</span><span class="p">():</span> <span class="k">pass</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="conv_clustering-65"><a href="#conv_clustering-65"><span class="linenos">65</span></a><span class="k">def</span> <span class="nf">conv_clustering</span><span class="p">():</span> <span class="k">pass</span>
 </span></pre></div>
 
 
