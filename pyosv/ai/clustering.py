@@ -37,6 +37,7 @@ def pixel_clustering(img : np.ndarray, n_clusters : int = 3) -> np.ndarray:
             ]  
         ) 
 
+        # Making channels last
         img = np.moveaxis(img, 0, -1)
 
         clusters = pixel_clustering(img, n_clusters = 2)
