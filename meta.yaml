@@ -26,6 +26,7 @@ requirements:
     - cartopy
     - pyproj
     - mayavi
+    - pyqt5
 
 test:
   imports:
