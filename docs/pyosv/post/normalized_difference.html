@@ -32,7 +32,7 @@
             <h2>Functions</h2>
                 <ul class="memberlist">
             <li>
-                    <a class="function" href="#ndvi">ndvi</a>
+                    <a class="function" href="#normalized_difference">normalized_difference</a>
             </li>
     </ul>
 
@@ -48,87 +48,97 @@
     <main class="pdoc">
             <section class="module-info">
                     <h1 class="modulename">
-<a href="./../../pyosv.html">pyosv</a><wbr>.<a href="./../post.html">post</a><wbr>.indices    </h1>
+<a href="./../../pyosv.html">pyosv</a><wbr>.<a href="./../post.html">post</a><wbr>.normalized_difference    </h1>
 
                 
-                        <input id="mod-indices-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                        <input id="mod-normalized_difference-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
-                        <label class="view-source-button" for="mod-indices-view-source"><span>View Source</span></label>
+                        <label class="view-source-button" for="mod-normalized_difference-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">..pre.normalized_difference</span> <span class="kn">import</span> <span class="n">normalized_difference</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="k">def</span> <span class="nf">ndvi</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">red_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nir_index</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">        Calculate the Normalized Difference Vegetation Index described by equation (1)</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">        </span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="sd">        NDVI = (NIR-RED)/(NIR+RED)          (1)</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">        </span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">        where NIR and RED are the near infrared and red bands</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">        </span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">        </span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">        Inputs:</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">            - image: a WxHxB MS image, with W width, H height and B bands            </span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">            - red_index (default 3 for Sentinel-2): is the index of the RED band in image</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">            - nir_index (default 7 for Sentinel-2): is the index of the NIR band in image</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        Outputs:</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">            - ndvi: the NDVI calculated using (1)</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    <span class="n">ndvi_v</span> <span class="o">=</span> <span class="n">normalized_difference</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">nir_index</span><span class="p">],</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">red_index</span><span class="p">])</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="k">return</span> <span class="n">ndvi_v</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="k">def</span> <span class="nf">normalized_difference</span><span class="p">(</span><span class="n">channel_1</span><span class="p">,</span> <span class="n">channel_2</span><span class="p">):</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="w">    </span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">        Normalized Difference</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">        </span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">        nd = (channelA - channleB)/(channelA + channle_B + E)          (1)</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="sd">        </span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">        E is stabilizer term</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">        </span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">        Inputs:</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">            - channel_1: channelA in equation (1)</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">            - channel_2: channelB in equation (1)</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">        </span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        Output:</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">            - nd: normalized difference between channelA and Channelb in equation (1)            </span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">        </span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">num</span> <span class="o">=</span> <span class="n">channel_1</span> <span class="o">-</span> <span class="n">channel_2</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">den</span> <span class="o">=</span> <span class="n">channel_1</span> <span class="o">+</span> <span class="n">channel_2</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>    
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="c1"># Avoiding 0 divisions</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="n">den</span><span class="p">[</span><span class="n">den</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.001</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">nd</span> <span class="o">=</span> <span class="n">num</span><span class="o">/</span><span class="n">den</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="k">return</span> <span class="n">nd</span>
 </span></pre></div>
 
 
             </section>
-                <section id="ndvi">
-                            <input id="ndvi-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                <section id="normalized_difference">
+                            <input id="normalized_difference-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">ndvi</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">image</span>, </span><span class="param"><span class="n">red_index</span><span class="o">=</span><span class="mi">3</span>, </span><span class="param"><span class="n">nir_index</span><span class="o">=</span><span class="mi">7</span></span><span class="return-annotation">):</span></span>
+        <span class="name">normalized_difference</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">channel_1</span>, </span><span class="param"><span class="n">channel_2</span></span><span class="return-annotation">):</span></span>
 
-                <label class="view-source-button" for="ndvi-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="normalized_difference-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#ndvi"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ndvi-4"><a href="#ndvi-4"><span class="linenos"> 4</span></a><span class="k">def</span> <span class="nf">ndvi</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">red_index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nir_index</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
-</span><span id="ndvi-5"><a href="#ndvi-5"><span class="linenos"> 5</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="ndvi-6"><a href="#ndvi-6"><span class="linenos"> 6</span></a><span class="sd">        Calculate the Normalized Difference Vegetation Index described by equation (1)</span>
-</span><span id="ndvi-7"><a href="#ndvi-7"><span class="linenos"> 7</span></a><span class="sd">        </span>
-</span><span id="ndvi-8"><a href="#ndvi-8"><span class="linenos"> 8</span></a><span class="sd">        NDVI = (NIR-RED)/(NIR+RED)          (1)</span>
-</span><span id="ndvi-9"><a href="#ndvi-9"><span class="linenos"> 9</span></a><span class="sd">        </span>
-</span><span id="ndvi-10"><a href="#ndvi-10"><span class="linenos">10</span></a><span class="sd">        where NIR and RED are the near infrared and red bands</span>
-</span><span id="ndvi-11"><a href="#ndvi-11"><span class="linenos">11</span></a><span class="sd">        </span>
-</span><span id="ndvi-12"><a href="#ndvi-12"><span class="linenos">12</span></a><span class="sd">        </span>
-</span><span id="ndvi-13"><a href="#ndvi-13"><span class="linenos">13</span></a><span class="sd">        Inputs:</span>
-</span><span id="ndvi-14"><a href="#ndvi-14"><span class="linenos">14</span></a><span class="sd">            - image: a WxHxB MS image, with W width, H height and B bands            </span>
-</span><span id="ndvi-15"><a href="#ndvi-15"><span class="linenos">15</span></a><span class="sd">            - red_index (default 3 for Sentinel-2): is the index of the RED band in image</span>
-</span><span id="ndvi-16"><a href="#ndvi-16"><span class="linenos">16</span></a><span class="sd">            - nir_index (default 7 for Sentinel-2): is the index of the NIR band in image</span>
-</span><span id="ndvi-17"><a href="#ndvi-17"><span class="linenos">17</span></a><span class="sd">        Outputs:</span>
-</span><span id="ndvi-18"><a href="#ndvi-18"><span class="linenos">18</span></a><span class="sd">            - ndvi: the NDVI calculated using (1)</span>
-</span><span id="ndvi-19"><a href="#ndvi-19"><span class="linenos">19</span></a>
-</span><span id="ndvi-20"><a href="#ndvi-20"><span class="linenos">20</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="ndvi-21"><a href="#ndvi-21"><span class="linenos">21</span></a>
-</span><span id="ndvi-22"><a href="#ndvi-22"><span class="linenos">22</span></a>    <span class="n">ndvi_v</span> <span class="o">=</span> <span class="n">normalized_difference</span><span class="p">(</span><span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">nir_index</span><span class="p">],</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">red_index</span><span class="p">])</span>
-</span><span id="ndvi-23"><a href="#ndvi-23"><span class="linenos">23</span></a>
-</span><span id="ndvi-24"><a href="#ndvi-24"><span class="linenos">24</span></a>    <span class="k">return</span> <span class="n">ndvi_v</span>
+    <a class="headerlink" href="#normalized_difference"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="normalized_difference-2"><a href="#normalized_difference-2"><span class="linenos"> 2</span></a><span class="k">def</span> <span class="nf">normalized_difference</span><span class="p">(</span><span class="n">channel_1</span><span class="p">,</span> <span class="n">channel_2</span><span class="p">):</span>
+</span><span id="normalized_difference-3"><a href="#normalized_difference-3"><span class="linenos"> 3</span></a><span class="w">    </span>
+</span><span id="normalized_difference-4"><a href="#normalized_difference-4"><span class="linenos"> 4</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+</span><span id="normalized_difference-5"><a href="#normalized_difference-5"><span class="linenos"> 5</span></a><span class="sd">        Normalized Difference</span>
+</span><span id="normalized_difference-6"><a href="#normalized_difference-6"><span class="linenos"> 6</span></a><span class="sd">        </span>
+</span><span id="normalized_difference-7"><a href="#normalized_difference-7"><span class="linenos"> 7</span></a><span class="sd">        nd = (channelA - channleB)/(channelA + channle_B + E)          (1)</span>
+</span><span id="normalized_difference-8"><a href="#normalized_difference-8"><span class="linenos"> 8</span></a><span class="sd">        </span>
+</span><span id="normalized_difference-9"><a href="#normalized_difference-9"><span class="linenos"> 9</span></a><span class="sd">        E is stabilizer term</span>
+</span><span id="normalized_difference-10"><a href="#normalized_difference-10"><span class="linenos">10</span></a><span class="sd">        </span>
+</span><span id="normalized_difference-11"><a href="#normalized_difference-11"><span class="linenos">11</span></a><span class="sd">        Inputs:</span>
+</span><span id="normalized_difference-12"><a href="#normalized_difference-12"><span class="linenos">12</span></a><span class="sd">            - channel_1: channelA in equation (1)</span>
+</span><span id="normalized_difference-13"><a href="#normalized_difference-13"><span class="linenos">13</span></a><span class="sd">            - channel_2: channelB in equation (1)</span>
+</span><span id="normalized_difference-14"><a href="#normalized_difference-14"><span class="linenos">14</span></a><span class="sd">        </span>
+</span><span id="normalized_difference-15"><a href="#normalized_difference-15"><span class="linenos">15</span></a><span class="sd">        Output:</span>
+</span><span id="normalized_difference-16"><a href="#normalized_difference-16"><span class="linenos">16</span></a><span class="sd">            - nd: normalized difference between channelA and Channelb in equation (1)            </span>
+</span><span id="normalized_difference-17"><a href="#normalized_difference-17"><span class="linenos">17</span></a><span class="sd">        </span>
+</span><span id="normalized_difference-18"><a href="#normalized_difference-18"><span class="linenos">18</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="normalized_difference-19"><a href="#normalized_difference-19"><span class="linenos">19</span></a>    
+</span><span id="normalized_difference-20"><a href="#normalized_difference-20"><span class="linenos">20</span></a>    <span class="n">num</span> <span class="o">=</span> <span class="n">channel_1</span> <span class="o">-</span> <span class="n">channel_2</span>
+</span><span id="normalized_difference-21"><a href="#normalized_difference-21"><span class="linenos">21</span></a>    <span class="n">den</span> <span class="o">=</span> <span class="n">channel_1</span> <span class="o">+</span> <span class="n">channel_2</span>
+</span><span id="normalized_difference-22"><a href="#normalized_difference-22"><span class="linenos">22</span></a>    
+</span><span id="normalized_difference-23"><a href="#normalized_difference-23"><span class="linenos">23</span></a>    <span class="c1"># Avoiding 0 divisions</span>
+</span><span id="normalized_difference-24"><a href="#normalized_difference-24"><span class="linenos">24</span></a>    <span class="n">den</span><span class="p">[</span><span class="n">den</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.001</span>
+</span><span id="normalized_difference-25"><a href="#normalized_difference-25"><span class="linenos">25</span></a>    
+</span><span id="normalized_difference-26"><a href="#normalized_difference-26"><span class="linenos">26</span></a>    <span class="n">nd</span> <span class="o">=</span> <span class="n">num</span><span class="o">/</span><span class="n">den</span>
+</span><span id="normalized_difference-27"><a href="#normalized_difference-27"><span class="linenos">27</span></a>    
+</span><span id="normalized_difference-28"><a href="#normalized_difference-28"><span class="linenos">28</span></a>    <span class="k">return</span> <span class="n">nd</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Calculate the Normalized Difference Vegetation Index described by equation (1)</p>
+            <div class="docstring"><p>Normalized Difference</p>
 
-<p>NDVI = (NIR-RED)/(NIR+RED)          (1)</p>
+<p>nd = (channelA - channleB)/(channelA + channle_B + E)          (1)</p>
 
-<p>where NIR and RED are the near infrared and red bands</p>
+<p>E is stabilizer term</p>
 
 <p>Inputs:
-    - image: a WxHxB MS image, with W width, H height and B bands <br />
-    - red_index (default 3 for Sentinel-2): is the index of the RED band in image
-    - nir_index (default 7 for Sentinel-2): is the index of the NIR band in image
-Outputs:
-    - ndvi: the NDVI calculated using (1)</p>
+    - channel_1: channelA in equation (1)
+    - channel_2: channelB in equation (1)</p>
+
+<p>Output:
+    - nd: normalized difference between channelA and Channelb in equation (1)</p>
 </div>
 
 

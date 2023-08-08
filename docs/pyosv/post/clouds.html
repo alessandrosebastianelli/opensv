@@ -34,9 +34,6 @@
             <li>
                     <a class="function" href="#cloud_detector">cloud_detector</a>
             </li>
-            <li>
-                    <a class="function" href="#white_detector">white_detector</a>
-            </li>
     </ul>
 
 
@@ -58,7 +55,7 @@
 
                         <label class="view-source-button" for="mod-clouds-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">..pre.normalized_difference</span> <span class="kn">import</span> <span class="n">normalized_difference</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="kn">from</span> <span class="nn">.normalized_difference</span> <span class="kn">import</span> <span class="n">normalized_difference</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="kn">from</span> <span class="nn">..pre.normalizer</span> <span class="kn">import</span> <span class="n">minmax_scaler</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
@@ -110,22 +107,6 @@
 </span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="n">score</span><span class="p">[</span><span class="n">score</span> <span class="o">&lt;</span> <span class="n">cloud_threshold</span><span class="p">]</span>  <span class="o">=</span> <span class="mi">0</span>
 </span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        
 </span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>    <span class="k">return</span> <span class="n">score</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="k">def</span> <span class="nf">white_detector</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cloud_threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">        Sentinel-2 cloud masking based on white pixels.</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">        </span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        Inputs:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">            - image: Sentinel-2 RGB WxHx3 image, it must be the RGB composite, with W width, H height and 3 bands (RGB)</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">            - cloud_threshold (optional) (std value 0.8): a value used to get withe pixels and build the mask</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">        </span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="sd">        Output:</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">            - cm: a WxH matrix representing the cloud mask</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="sd">    &#39;&#39;&#39;</span>   
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>    
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>    <span class="n">cm</span> <span class="o">=</span> <span class="p">((</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="k">return</span> <span class="n">cm</span>
 </span></pre></div>
 
 
@@ -196,47 +177,6 @@
 
 <p>Output:
     - score: a WxH matrix representing the cloud mask</p>
-</div>
-
-
-                </section>
-                <section id="white_detector">
-                            <input id="white_detector-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">white_detector</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">image</span>, </span><span class="param"><span class="n">cloud_threshold</span><span class="o">=</span><span class="mf">0.8</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="white_detector-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#white_detector"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="white_detector-55"><a href="#white_detector-55"><span class="linenos">55</span></a><span class="k">def</span> <span class="nf">white_detector</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cloud_threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
-</span><span id="white_detector-56"><a href="#white_detector-56"><span class="linenos">56</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-</span><span id="white_detector-57"><a href="#white_detector-57"><span class="linenos">57</span></a><span class="sd">        Sentinel-2 cloud masking based on white pixels.</span>
-</span><span id="white_detector-58"><a href="#white_detector-58"><span class="linenos">58</span></a><span class="sd">        </span>
-</span><span id="white_detector-59"><a href="#white_detector-59"><span class="linenos">59</span></a><span class="sd">        Inputs:</span>
-</span><span id="white_detector-60"><a href="#white_detector-60"><span class="linenos">60</span></a><span class="sd">            - image: Sentinel-2 RGB WxHx3 image, it must be the RGB composite, with W width, H height and 3 bands (RGB)</span>
-</span><span id="white_detector-61"><a href="#white_detector-61"><span class="linenos">61</span></a><span class="sd">            - cloud_threshold (optional) (std value 0.8): a value used to get withe pixels and build the mask</span>
-</span><span id="white_detector-62"><a href="#white_detector-62"><span class="linenos">62</span></a><span class="sd">        </span>
-</span><span id="white_detector-63"><a href="#white_detector-63"><span class="linenos">63</span></a><span class="sd">        Output:</span>
-</span><span id="white_detector-64"><a href="#white_detector-64"><span class="linenos">64</span></a><span class="sd">            - cm: a WxH matrix representing the cloud mask</span>
-</span><span id="white_detector-65"><a href="#white_detector-65"><span class="linenos">65</span></a><span class="sd">    &#39;&#39;&#39;</span>   
-</span><span id="white_detector-66"><a href="#white_detector-66"><span class="linenos">66</span></a>    
-</span><span id="white_detector-67"><a href="#white_detector-67"><span class="linenos">67</span></a>    <span class="n">cm</span> <span class="o">=</span> <span class="p">((</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span><span class="n">cloud_threshold</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
-</span><span id="white_detector-68"><a href="#white_detector-68"><span class="linenos">68</span></a>    
-</span><span id="white_detector-69"><a href="#white_detector-69"><span class="linenos">69</span></a>    <span class="k">return</span> <span class="n">cm</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>Sentinel-2 cloud masking based on white pixels.</p>
-
-<p>Inputs:
-    - image: Sentinel-2 RGB WxHx3 image, it must be the RGB composite, with W width, H height and 3 bands (RGB)
-    - cloud_threshold (optional) (std value 0.8): a value used to get withe pixels and build the mask</p>
-
-<p>Output:
-    - cm: a WxH matrix representing the cloud mask</p>
 </div>
 
 
