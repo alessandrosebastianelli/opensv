@@ -73,7 +73,7 @@ def plot(img : np.ndarray, hist : bool = False) -> None:
     plt.show()
 
 
-def bands_plot(img : np.ndarray, hist : bool = False):
+def bands_plot(img : np.ndarray, hist : bool = False) -> None:
     '''
         Plot a satellite image bands and relative histograms.
 
@@ -128,7 +128,7 @@ def bands_plot(img : np.ndarray, hist : bool = False):
     if hist: nrows = 2
     
     fig, axes = plt.subplots(nrows = nrows, ncols = ncols, figsize = (4*ncols, 4*nrows))
-        
+
     for c in range(ncols):
         
         if hist:
