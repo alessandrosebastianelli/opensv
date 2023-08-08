@@ -109,25 +109,3 @@ def print_stats(img : np.ndarray, bandwise : bool = False) -> None:
         print('{:<20s}{:<30s}'.format('[*] Mean', str(np.mean(img))))
         print('{:<20s}{:<30s}'.format('[*] Std',  str(np.std(img))))
         print('{:<20s}{:<30s}'.format('[*] Med',  str(np.median(img))))
-
-
-import numpy as np
-
-img         = np.array(  
-    [[
-        [0.1, 0.2, 0.3],  
-        [0.4, 0.5, 0.6],  
-        [0.7, 0.8, 0.9]
-        ],
-        [
-        [1.1, 1.2, 1.3],  
-        [1.4, 1.5, 1.6],  
-        [1.7, 1.8, 1.9]
-        ]
-    ]  
-) 
-
-# Making channels last
-img = np.moveaxis(img, 0, -1)
-
-print_stats(img, bandwise = True)
