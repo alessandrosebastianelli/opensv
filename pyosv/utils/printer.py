@@ -1,43 +1,133 @@
 import numpy as np
 
-def dict_disp(dict):
+def dict_disp(dictionary : dict) -> None:
     '''
-
         Print a dictionary in a more readable way
 
-        Input:
-            - dict: python dictionary to print
+        Parameter:
+        ----------
+            - dictionary : dict
+                python dictionary to print
+        
+        Returns:
+        --------
+        Nothing, it will print the dictionary
+
+        Usage:
+        ------
+
+        ```python
+        dictionary = {'Name' : 'John', 'Surname' : 'Wick'}
+        disp_dict(dictionary)
+        ```
+
+        Output:
+        -------
+
+        ```
+        -----------Dictionary------------  
+            [*] Name : Johnny
+            [*] Surname : Wick
+        ```
+
     '''
 
-    print('//----------- Dictionary -----------//')
+    l_k = len([k for k in dictionary.keys() if len(str(k))==max([len(str(n)) for n in dictionary.keys()])][0])
+    l_v = len([k for k in dictionary.values() if len(str(k))==max([len(str(n)) for n in dictionary.values()])][0])
 
-    for key, value in dict.items():
+    n =  20 + l_k + l_v
+    print('{:-^{len}}'.format('Dictionary', len=n))
+
+    for key, value in dictionary.items():
         print('\t [*] {} : {}'.format(str(key), str(value)))
 
-def print_stats(image, perband=False):
-    '''
 
+def print_stats(img : np.ndarray, bandwise : bool = False) -> None:
+    '''
         Print some statistics for the input image
 
-        Inputs:
+        Parameters:
+        -----------
             - image: a WxHxB image, with width W, height H and B bands
-            - perband (optional): if true the function will print the statistics for each band separately
+            - bandwise : bool 
+                if true the function will print the statistics for each band separately (default : False)
+        
+        Returns:
+        --------
+        Nothing, it will print image statistics
+
+        Usage:
+        ------
+        ```python
+        import numpy as np
+
+        img         = np.array(  
+            [[
+                [0.1, 0.2, 0.3],  
+                [0.4, 0.5, 0.6],  
+                [0.7, 0.8, 0.9]
+             ],
+             [
+                [1.1, 1.2, 1.3],  
+                [1.4, 1.5, 1.6],  
+                [1.7, 1.8, 1.9]
+             ]
+            ]  
+        ) 
+
+        # Making channels last
+        img = np.moveaxis(img, 0, -1)
+
+        print_stats(img, bandwise = True)
+
+        ```
+
+        Output:
+        -------
+
+        ```
+        ```
     '''
 
-    print('//----------- Image Statistics -----------//')
-    print('\t [*] Shape              {}'.format(image.shape))
+    if len(img.shape) != 3:
+        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
 
-    if perband:
-        for i in range(image.shape[-1]):
-            print('\t Band #{}'.format(i))
-            print('\t\t [*] Max                {0:.5f}'.format(np.max(image[:, :, i])))
-            print('\t\t [*] Min                {0:.5f}'.format(np.min(image[:, :, i])))
-            print('\t\t [*] Mean               {0:.5f}'.format(np.mean(image[:, :, i])))
-            print('\t\t [*] Standard Deviation {0:.5f}'.format(np.std(image[:, :, i])))
-            print('\t\t [*] Median             {0:.5f}'.format(np.median(image[:, :, i])))
+    print('{:-^{len}}'.format('Image Statistics', len=50))
+    print('{:<20s}{}'.format('[*] Shape', img.shape))
+
+    if bandwise:
+        for i in range(img.shape[-1]):
+            print('{:<20s}'.format('Band '+str(i)))
+            print('\t{:<20s}{:<30s}'.format('[*] Max',  str(np.max(img[:, :, i]))))
+            print('\t{:<20s}{:<30s}'.format('[*] Min',  str(np.min(img[:, :, i]))))
+            print('\t{:<20s}{:<30s}'.format('[*] Mean', str(np.mean(img[:, :, i]))))
+            print('\t{:<20s}{:<30s}'.format('[*] Std',  str(np.std(img[:, :, i]))))
+            print('\t{:<20s}{:<30s}'.format('[*] Med',  str(np.median(img[:, :, i]))))
     else:
-        print('\t [*] Max                {0:.5f}'.format(np.max(image)))
-        print('\t [*] Min                {0:.5f}'.format(np.min(image)))
-        print('\t [*] Mean               {0:.5f}'.format(np.mean(image)))
-        print('\t [*] Standard Deviation {0:.5f}'.format(np.std(image)))
-        print('\t [*] Median             {0:.5f}'.format(np.median(image)))
+        print('{:<20s}{:<30s}'.format('[*] Max',  str(np.max(img))))
+        print('{:<20s}{:<30s}'.format('[*] Min',  str(np.min(img))))
+        print('{:<20s}{:<30s}'.format('[*] Mean', str(np.mean(img))))
+        print('{:<20s}{:<30s}'.format('[*] Std',  str(np.std(img))))
+        print('{:<20s}{:<30s}'.format('[*] Med',  str(np.median(img))))
+
+
+import numpy as np
+
+img         = np.array(  
+    [[
+        [0.1, 0.2, 0.3],  
+        [0.4, 0.5, 0.6],  
+        [0.7, 0.8, 0.9]
+        ],
+        [
+        [1.1, 1.2, 1.3],  
+        [1.4, 1.5, 1.6],  
+        [1.7, 1.8, 1.9]
+        ]
+    ]  
+) 
+
+# Making channels last
+img = np.moveaxis(img, 0, -1)
+
+print_stats(img, bandwise = True)
