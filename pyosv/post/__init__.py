@@ -4,5 +4,4 @@
 
 from .clouds import *
 from .composite import *
-from .indices import *
 from .patch_extractor import *

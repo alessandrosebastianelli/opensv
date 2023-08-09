@@ -6,7 +6,6 @@ def rgb_composite(image, rgb = [3,2,1]):
     '''
     
         Create an RGB composite.
-                              (1c)
             
         Inputs:
             - image: must be a WxHxB MS image, with W width, H height and B bands, it must contain RGB bands
@@ -20,6 +19,7 @@ def rgb_composite(image, rgb = [3,2,1]):
     composite = np.moveaxis(composite, 0, -1)
     
     return composite
+
 
 def swir_highlight(image, rgb = [3,2,1], swir = [10,11]):
     '''
