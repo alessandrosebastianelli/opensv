@@ -7,16 +7,58 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def hist_normalizer(img):
+def hist_normalizer(img : np.ndarray) -> None:
     '''
-    
         Open a gui that helps to stretch the histogram of an image
-    
+     
+        Parameters:
+        -----------
+            - img : np.ndarray 
+                a WxHxB image, with width W, height H and B bands
         
-        Inputs:
-            - img: a WxHxB image, with width W, height H and B bands (B can be 1 or 3) 
+        Returns:
+        --------
+        Nothing, it will display and image
+
+        Usage:
+        ------
+        ```python
+        import numpy as np  
+
+        img         = np.array(  
+            [[
+                [0.1, 0.2, 0.3],  
+                [0.4, 0.5, 0.6],  
+                [0.7, 0.8, 0.9]
+                ],
+            [
+                [0.1, 0.2, 0.3],  
+                [0.4, 0.5, 0.6],  
+                [0.7, 0.8, 0.9]
+                ],
+            [
+                [0.1, 0.2, 0.3],  
+                [0.4, 0.5, 0.6],  
+                [0.7, 0.8, 0.9]
+                ]
+            ]  
+        ) 
+
+        # Making channels last
+        img = np.moveaxis(img, 0, -1)
+
+        hist_normalizer(img)
+        ```
+
+        Output:
+        -------
+        Nothing, it will display an image
     '''
     
+
+    if len(img.shape) != 3:
+        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
+
     # Update plot
     def plot(img):
         # Clear axis
@@ -48,8 +90,8 @@ def hist_normalizer(img):
     # GUI
     root = Tk()
     root.title('Histrogram Scaler')
-    root.geometry('1000x620')
-    root.resizable(False, False)
+    #root.geometry('1000x620')
+    #root.resizable(False, False)
     
     chart_type = FigureCanvasTkAgg(figure, root)
     chart_type.get_tk_widget().pack()
