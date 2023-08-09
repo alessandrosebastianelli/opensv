@@ -17,7 +17,7 @@ def percentile_prescaler(img : np.ndarray , perc : list, mmin : list = None) -> 
         Returns:
         --------
             - img : np.ndarray 
-            normalized WxHxB image, with W width, H height and B bands
+                normalized WxHxB image, with W width, H height and B bands
 
         Usage:
         ------
