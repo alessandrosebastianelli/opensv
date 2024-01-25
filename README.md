@@ -11,14 +11,32 @@ This library comprises a collection of functions and classes tailored to manage 
 
 ## Installation
 
+You need to create a virtual environment
+
+```bash
+conda create -n osv python=3.10 -y
+conda activate osv
+conda install pip -y
+```
+
 This package is stored on [PyPi](https://pypi.org/project/pyosv/), you can easily install it using pip
 
 ```bash
 pip install --upgrade pyosv
 ```
 
-Although certain elements of this library draw from Mayavi, these package is not included in the library's prerequisites, and therefore, it will not be automatically installed. 
+Although certain elements of this library draw from Mayavi, these package is not included in the library's prerequisites, and therefore, it will not be automatically installed. To install it run the following command, once your virtual environment is active
 
+```bash
+pip install mayavi
+```
+
+or 
+
+```bash
+conda install mayavi
+```
+if there are issue with the first command.
 
 ## How to contribute
 
