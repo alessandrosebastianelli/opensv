@@ -1,38 +1,25 @@
-### Python Open Satellite Vision
+![GitHub last commit](https://img.shields.io/github/last-commit/alessandrosebastianelli/opensv?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/alessandrosebastianelli/opensv?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/alessandrosebastianelli/opensv?style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/alessandrosebastianelli/opensv?style=flat-square)
 
-This package contains functionalities to open, process and manipulate satellite data.
+# Open Satellite Vision
 
-## Documentation
-The documentation has been produced using [pdoc](https://pdoc.dev).
+This library comprises a collection of functions and classes tailored to manage satellite based data.
 
-```python build_doc.py```
+<a class="btn btn-success" href="https://alessandrosebastianelli.github.io/opensv/pyosv.html" target="_blank">Click here to access the documentation</a>
 
-and it is available [here](https://alessandrosebastianelli.github.io/opensv/pyosv.html).
+## Installation
 
-## Build and install the package
+This package is stored on [PyPi](https://pypi.org/project/pyosv/), you can easily install it using pip
 
-Move to opensv folder
+```bash
+pip install --upgrade pyosv
+```
 
-opensv/  
-├─ pyosv/  
-├─ tests/  
-├─ setup.py  
-├─ LICENSE  
-├─ README.md  
-├─ docs  
-├─ .gitignore  
-
-and run
-
-```python build_dist.py```
-
-after building the wheels, you can install the library bu running
-
-```pip install dist/pyosv-0.0.1-py3-none-any.whl```
-
-**be aware that version (0.0.1) can change**.
+Although certain elements of this library draw from Mayavi, these package is not included in the library's prerequisites, and therefore, it will not be automatically installed. 
 
 
-## Upload to PyPi
+## How to contribute
 
-```python3 -m twine upload dist/* --verbose```
+[Click here](https://github.com/alessandrosebastianelli/opensv/issues/2)

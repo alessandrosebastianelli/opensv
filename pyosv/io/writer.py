@@ -12,7 +12,7 @@ def write(image : np.ndarray, path : str, meta : dict) -> None:
         Supported data format
 
         RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
-        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
 
         Data must always be in channel last format.
 
@@ -65,7 +65,7 @@ def write(image : np.ndarray, path : str, meta : dict) -> None:
     '''
 
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff']
-    MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+    MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
 
 
     if path is None:

@@ -12,7 +12,7 @@ def load(path : str) -> [np.ndarray, dict, list]:
         Supported data format
 
         RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
-        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+        MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
 
         Returns always data in channel last format.
 
@@ -75,7 +75,7 @@ def load(path : str) -> [np.ndarray, dict, list]:
     
     
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']
-    MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg']
+    MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
     
     
     if path is None:

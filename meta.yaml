@@ -1,6 +1,6 @@
 package:
   name: pyosv
-  version: "0.0.3"
+  version: "0.0.8"
 
 source:
   path: ./
@@ -25,7 +25,6 @@ requirements:
     - scipy
     - cartopy
     - pyproj
-    - mayavi
     - pyqt5
 
 test:
