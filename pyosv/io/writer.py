@@ -3,6 +3,7 @@ from ..utils.paths import get_path_gui
 import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
+import netCDF4
 
 
 def write(image : np.ndarray, path : str, meta : dict) -> None:
@@ -13,10 +14,12 @@ def write(image : np.ndarray, path : str, meta : dict) -> None:
 
         RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
         MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
+        NETCDF4_EXTENSIONS    = ['.nc']
 
         Data must always be in channel last format.
 
         If image extension is in MATPLOTLIB_EXTENSIONS, metadata can be None.
+        If image extension is in NETCDF4_EXTENSIONS, metadata can be None.
 
         Parameters:
         -----------
@@ -66,13 +69,13 @@ def write(image : np.ndarray, path : str, meta : dict) -> None:
 
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff']
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
+    NETCDF4_EXTENSIONS    = ['.nc']
 
 
     if path is None:
         path = get_path_gui()
 
     if any(frmt in path for frmt in RASTERIO_EXTENSIONS):
-
         if image!=None:
             meta.update({'driver':'GTiff',
                             'width':image.shape[0],
@@ -86,6 +89,7 @@ def write(image : np.ndarray, path : str, meta : dict) -> None:
 
     elif any(frmt in path for frmt in MATPLOTLIB_EXTENSIONS):
         plt.imsave(path, image)
-
+    elif any(frmt in path for frmt in NETCDF4_EXTENSIONS):
+        raise Exception('Error: [under dev] currently netCDF4 files can not be saved!')
     else:
         raise Exception('Error: file can not be saved, format not supported!')

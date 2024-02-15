@@ -3,9 +3,10 @@ from ..utils.paths import get_path_gui
 import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
+import netCDF4
 
 
-def load(path : str) -> [np.ndarray, dict, list]:
+def load(path : str) -> [np.ndarray or dict, dict, list]:
     '''
         Load an image and its metadata given its path.
 
@@ -13,10 +14,12 @@ def load(path : str) -> [np.ndarray, dict, list]:
 
         RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']  
         MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
+        NETCDF4_EXTENSIONS    = ['.nc']
 
         Returns always data in channel last format.
 
-        If image extension is in MATPLOTLIB_EXTENSIONS, metadata and bound will be None.
+        If image extension is in MATPLOTLIB_EXTENSIONS, metadata and bouns will be None.
+        If image extension is in NETCDF4_EXTENSIONS, metadata and bounds will be None.
         
         Parameters:
         -----------
@@ -25,7 +28,7 @@ def load(path : str) -> [np.ndarray, dict, list]:
 
         Returns:
         --------
-            - data : np.ndarray
+            - data : np.ndarray or list
                 WxHxB image, with W width, H height and B bands
 
             - metadata : dict
@@ -76,6 +79,7 @@ def load(path : str) -> [np.ndarray, dict, list]:
     
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
+    NETCDF4_EXTENSIONS    = ['.nc']
     
     
     if path is None:
@@ -89,6 +93,10 @@ def load(path : str) -> [np.ndarray, dict, list]:
         data = np.moveaxis(data, 0, -1)
     elif any(frmt in path for frmt in MATPLOTLIB_EXTENSIONS):
         data = plt.imread(path)
+        metadata = None
+        bounds = None
+    elif any(frmt in path for frmt in NETCDF4_EXTENSIONS):
+        data = netCDF4.Dataset(path, 'r')
         metadata = None
         bounds = None
     else:
