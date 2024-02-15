@@ -1,6 +1,6 @@
 package:
   name: pyosv
-  version: "0.0.9"
+  version: "0.0.10"
 
 source:
   path: ./
@@ -26,6 +26,7 @@ requirements:
     - cartopy
     - pyproj
     - pyqt5
+    - netCDF4
 
 test:
   imports:

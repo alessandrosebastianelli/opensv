@@ -16,7 +16,7 @@ def readme():
 # Package 
 HERE = pathlib.Path(__file__).parent
 PACKAGE_NAME  = 'pyosv'
-VERSION = '0.0.9'
+VERSION = '0.0.10'
 AUTHOR = 'Alessandro Sebastianelli'
 AUTHOR_EMAIL = 'alessandro.sebastianelli1995@gmail.com'
 URL = 'https://github.com/alessandrosebastianelli/opensv.git'
@@ -27,18 +27,7 @@ LONG_DESCRIPTION = readme()
 LONG_DESC_TYPE = 'text/markdown'
 
 
-INSTALL_REQUIRES = [
-#    "numpy",
-#    "rasterio",
-#    "scikit-learn",
-#    "tqdm",
-#    "matplotlib",
-#    "scipy",
-#    "vtk==9.0.1",
-#    "mayavi",
-#    "cartopy",
-#    "pyproj"
-]
+INSTALL_REQUIRES = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj", "pyqt5", "netCDF4"]
 
 
 def gitcmd_update_submodules():

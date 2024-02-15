@@ -1,9 +1,9 @@
 [build-system]
-requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj", "pyqt5"]
+requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj", "pyqt5", "netCDF4"]
 
 [project]
 name = "pyosv"
-version = "0.0.9"
+version = "0.0.10"
 authors = [
   { name="Alessandro Sebastianelli", email="alessandro.sebastianelli1995@gmail.com" },
 ]
@@ -16,7 +16,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj", "pyqt5"]
+dependencies = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", "cartopy", "pyproj", "pyqt5", "netCDF4"]
 
 [project.urls]
 "Homepage" = "https://github.com/alessandrosebastianelli/opensv"
