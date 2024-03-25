@@ -59,11 +59,9 @@ def percentile_prescaler(img : np.ndarray , perc : int, mmin : float = None) -> 
         ```
     '''
 
-    if len(img.shape) != 3:
-        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
     
-    if mmin is None: mmin = np.min(img)
-    mmax = np.percentile(img, perc)
+    if mmin is None: mmin = np.nanmin(img)
+    mmax = np.nanpercentile(img, perc)
     img = np.clip(img, mmin, mmax)
     
     return img
@@ -132,13 +130,10 @@ def minmax_scaler(img : np.ndarray, mmin : float = None, mmax : float = None, cl
         [0.5       0.5      ]]]  
         ```
     '''
-
-    if len(img.shape) != 3:
-        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
     
     E = 0.001
-    if mmin == None: mmin = np.min(img)
-    if mmax == None: mmax = np.max(img)
+    if mmin == None: mmin = np.nanmin(img)
+    if mmax == None: mmax = np.nanmax(img)
     img = (img - mmin)/((mmax - mmin) + E)
     if clip is not None: img = np.clip(img, clip[0], clip[-1])
     
@@ -206,12 +201,9 @@ def std_scaler(img : np.ndarray, mmean : float = None, sstd : float = None, clip
             [0.         0.5       ]]]   
         ```
     '''
-
-    if len(img.shape) != 3:
-        raise Exception('Error: lenght of image shape must be 3 - (space, space, channels)')
     
-    if mmean == None: mmean = np.mean(img)
-    if sstd  == None: sstd  = np.std(img)
+    if mmean == None: mmean = np.nanmean(img)
+    if sstd  == None: sstd  = np.nanstd(img)
     img = (img - mmean)/(sstd)
     
     if clip is not None: img = np.clip(img, clip[0], clip[-1])
