@@ -70,10 +70,10 @@ def percentile_prescaler(img : np.ndarray , perc : list, mmin : list = None) -> 
         raise Exception('Error: lenght of perc must be equals to number of bands')
 
 
-    if mmin is None: mmin = np.min(img, axis=-1)
+    if mmin is None: mmin = np.nanmin(img, axis=-1)
 
     for i in range(img.shape[-1]):
-        mmax = np.percentile(img[:,:,i], perc[i])
+        mmax = np.nanpercentile(img[:,:,i], perc[i])
         img[:,:,i] = np.clip(img[:,:,i], mmin[i], mmax)
     
     return img
@@ -156,8 +156,8 @@ def minmax_scaler(img : np.ndarray, mmin : list = None, mmax : list = None, clip
     
     E = 0.001
 
-    if mmin == None: mmin = np.min(img, axis=-1)
-    if mmax == None: mmax = np.max(img, axis=-1)
+    if mmin == None: mmin = np.nanmin(img, axis=-1)
+    if mmax == None: mmax = np.nanmax(img, axis=-1)
     
     for i in range(img.shape[-1]):    
         img[:,:,i] = (img[:,:,i] - mmin[i])/((mmax[i] - mmin[i]) + E)
@@ -240,8 +240,8 @@ def std_scaler(img : np.ndarray, mmean : list = None, sstd : list = None, clip :
         if len(sstd) != img.shape[-1]:
             raise Exception('Error: lenght of mmax must be equals to number of bands')
     
-    if mmean == None: mmean = np.mean(img, axis=-1)
-    if sstd  == None: sstd  = np.std(img, axis=-1)
+    if mmean == None: mmean = np.nanmean(img, axis=-1)
+    if sstd  == None: sstd  = np.nanstd(img, axis=-1)
     
     for i in range(img.shape[-1]):    
         img[:,:,i] = (img[:,:,i] - mmean[i])/(sstd[i])
