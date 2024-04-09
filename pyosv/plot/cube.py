@@ -69,7 +69,7 @@ def plot3d(img : np.ndarray, animate : bool = False) -> None:
     mlab.show()
 
 
-def cube_plot(img : np.ndarray, band_thinkness : int = 3) -> None:
+def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap : str = 'jet') -> None:
     '''
         Cube pot of a satellite image.
 
@@ -77,8 +77,12 @@ def cube_plot(img : np.ndarray, band_thinkness : int = 3) -> None:
         ----------
             - img : np.ndarray
                 a WxHxB image, with width W, height H and B bands (B can be 3 or 1)
+            - save_path : str
+                path where to save figure
             - band_thinkness : int
                 thikness of each satellite band
+            - cmap : str
+                colormap for the plot
         
         Returns:
         --------
@@ -107,7 +111,7 @@ def cube_plot(img : np.ndarray, band_thinkness : int = 3) -> None:
         # Making channel last
         img = np.moveaxis(img, 0, -1)
 
-        cube_plot(img, band_thikness=10)
+        cube_plot(img, 'img.png', band_thikness=10, cmap='jet')
 
         ```
 
@@ -117,28 +121,30 @@ def cube_plot(img : np.ndarray, band_thinkness : int = 3) -> None:
 
     '''
     
-    if len(img.shape) != 3:
-        raise Exception("Error: lenght of img shape must be 3")
-    
+    if len(img.shape) != 3: raise Exception("Error: lenght of img shape must be 3")
+
 
     img = np.repeat(img, band_thinkness, axis=-1)
-
 
     fig = mlab.figure(figure='', bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
 
     scalars = img  # specifying the data array
 
     # Crossline slices
-    mlab.volume_slice(scalars, slice_index=0, plane_orientation='x_axes', figure=fig)  # crossline slice
-    mlab.volume_slice(scalars, slice_index=img.shape[0], plane_orientation='x_axes', figure=fig)  # crossline slice
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='x_axes', figure=fig, colormap=cmap)  # crossline slice
+    mlab.volume_slice(scalars, slice_index=img.shape[0], plane_orientation='x_axes', figure=fig, colormap=cmap)  # crossline slice
 
     # Inline slices
-    mlab.volume_slice(scalars, slice_index=0, plane_orientation='y_axes', figure=fig)  # inline slice
-    mlab.volume_slice(scalars, slice_index=img.shape[1], plane_orientation='y_axes', figure=fig)  # inline slice
-    
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='y_axes', figure=fig, colormap=cmap)  # inline slice
+    mlab.volume_slice(scalars, slice_index=img.shape[1], plane_orientation='y_axes', figure=fig, colormap=cmap)  # inline slice
+
     # Depth slices
-    mlab.volume_slice(scalars, slice_index=img.shape[-1], plane_orientation='z_axes', figure=fig)  # depth slice
-    mlab.volume_slice(scalars, slice_index=0, plane_orientation='z_axes', figure=fig)  # depth slice
+    mlab.volume_slice(scalars, slice_index=img.shape[-1], plane_orientation='z_axes', figure=fig, colormap=cmap)  # depth slice
+    mlab.volume_slice(scalars, slice_index=0, plane_orientation='z_axes', figure=fig, colormap=cmap)  # depth slice
+
 
     mlab.draw()
+
+    mlab.savefig(filename=save_path)
+
     mlab.show()
