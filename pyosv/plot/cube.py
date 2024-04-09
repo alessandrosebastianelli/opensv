@@ -69,7 +69,7 @@ def plot3d(img : np.ndarray, animate : bool = False) -> None:
     mlab.show()
 
 
-def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap : str = 'jet') -> None:
+def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap : str = 'jet', show : bool = True) -> None:
     '''
         Cube pot of a satellite image.
 
@@ -83,6 +83,8 @@ def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap 
                 thikness of each satellite band
             - cmap : str
                 colormap for the plot
+            - show : bool
+                if True will show the plot, othewise will be only saved to a file
         
         Returns:
         --------
@@ -111,7 +113,7 @@ def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap 
         # Making channel last
         img = np.moveaxis(img, 0, -1)
 
-        cube_plot(img, 'img.png', band_thikness=10, cmap='jet')
+        cube_plot(img, 'img.png', band_thikness=10, cmap='jet', show=True)
 
         ```
 
@@ -147,4 +149,4 @@ def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap 
 
     mlab.savefig(filename=save_path)
 
-    mlab.show()
+    if show: mlab.show()
