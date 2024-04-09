@@ -80,6 +80,7 @@ def load(path : str) -> [np.ndarray or dict, dict, list]:
     RASTERIO_EXTENSIONS   = ['.tif', '.tiff', '.geotiff']
     MATPLOTLIB_EXTENSIONS = ['.png', '.jpg', 'jpeg', 'jp2']
     NETCDF4_EXTENSIONS    = ['.nc']
+    NUMPY_EXTENSIONS      = ['.npy', '.npz']
     
     
     if path is None:
@@ -97,6 +98,10 @@ def load(path : str) -> [np.ndarray or dict, dict, list]:
         bounds = None
     elif any(frmt in path for frmt in NETCDF4_EXTENSIONS):
         data = netCDF4.Dataset(path, 'r')
+        metadata = None
+        bounds = None
+    elif any(frmt in path for frmt in NUMPY_EXTENSIONS):
+        data = np.load(path)
         metadata = None
         bounds = None
     else:
