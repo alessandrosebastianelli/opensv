@@ -1,6 +1,7 @@
 from mayavi import mlab
 import numpy as np
 
+
 def plot3d(img : np.ndarray, animate : bool = False) -> None:
     '''
         3D-Plot of a satellite image.
@@ -128,7 +129,7 @@ def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap 
 
     img = np.repeat(img, band_thinkness, axis=-1)
 
-    fig = mlab.figure(figure='', bgcolor=(1, 1, 1), fgcolor=(0, 0, 0), size=(600, 600))
+    fig = mlab.figure(figure='', bgcolor=(1,1,1), fgcolor=(0, 0, 0), size=(600, 600))
 
     scalars = img  # specifying the data array
 
@@ -146,7 +147,9 @@ def cube_plot(img : np.ndarray, save_path : str, band_thinkness : int = 3, cmap 
 
 
     mlab.draw()
-
     mlab.savefig(filename=save_path)
-
+    
     if show: mlab.show()
+    else: 
+        mlab.clf()
+        mlab.close(scene=None, all=True)

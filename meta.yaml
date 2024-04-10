@@ -1,6 +1,6 @@
 package:
   name: pyosv
-  version: "0.0.15"
+  version: "0.0.24"
 
 source:
   path: ./
@@ -27,6 +27,7 @@ requirements:
     - pyproj
     - pyqt5
     - netCDF4
+    - pillow
 
 test:
   imports:
