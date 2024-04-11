@@ -159,8 +159,11 @@ def minmax_scaler(img : np.ndarray, mmin : list = None, mmax : list = None, clip
     if mmin == None: mmin = np.nanmin(img, axis=-1)
     if mmax == None: mmax = np.nanmax(img, axis=-1)
     
-    for i in range(img.shape[-1]):    
-        img[:,:,i] = (img[:,:,i] - mmin[i])/((mmax[i] - mmin[i]) + E)
+    for i in range(img.shape[-1]):  
+        num = img[:,:,i] - mmin[i]
+        den = mmax[i] - mmin[i]
+          
+        img[:,:,i] = np.divide(num, den, where=den != 0)
     
     if clip is not None: img = np.clip(img, clip[0], clip[-1])
     
@@ -244,7 +247,7 @@ def std_scaler(img : np.ndarray, mmean : list = None, sstd : list = None, clip :
     if sstd  == None: sstd  = np.nanstd(img, axis=-1)
     
     for i in range(img.shape[-1]):    
-        img[:,:,i] = (img[:,:,i] - mmean[i])/(sstd[i])
+        img[:,:,i] = np.divide(img[:,:,i] - mmean[i], sstd[i], where=sstd[i] != 0)
     
     if clip is not None: img = np.clip(img, clip[0], clip[-1])
     
