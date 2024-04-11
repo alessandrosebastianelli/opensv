@@ -60,6 +60,6 @@ def normalized_difference(channel_1 : np.ndarray, channel_2 : np.ndarray) -> np.
     # Avoiding 0 divisions
     den[den==0] = 0.001 #E
     
-    nd = num/den
+    nd = np.divide(num, den, where=den != 0)
     
     return nd
