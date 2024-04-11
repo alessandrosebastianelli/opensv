@@ -154,8 +154,6 @@ def minmax_scaler(img : np.ndarray, mmin : list = None, mmax : list = None, clip
         if len(mmax) != img.shape[-1]:
             raise Exception('Error: lenght of mmax must be equals to number of bands')
     
-    E = 0.001
-
     if mmin == None: mmin = np.nanmin(img, axis=-1)
     if mmax == None: mmax = np.nanmax(img, axis=-1)
     
@@ -165,7 +163,8 @@ def minmax_scaler(img : np.ndarray, mmin : list = None, mmax : list = None, clip
           
         img[:,:,i] = np.divide(num, den, where=den != 0)
     
-    if clip is not None: img = np.clip(img, clip[0], clip[-1])
+    if (clip[0] is not None) and (clip[1] is not None):
+        img = np.clip(img, clip[0], clip[-1])
     
     return img
 
@@ -249,6 +248,7 @@ def std_scaler(img : np.ndarray, mmean : list = None, sstd : list = None, clip :
     for i in range(img.shape[-1]):    
         img[:,:,i] = np.divide(img[:,:,i] - mmean[i], sstd[i], where=sstd[i] != 0)
     
-    if clip is not None: img = np.clip(img, clip[0], clip[-1])
+    if (clip[0] is not None) and (clip[1] is not None):
+        img = np.clip(img, clip[0], clip[-1])
     
     return img

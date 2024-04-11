@@ -3,7 +3,7 @@ requires = ["numpy", "rasterio", "scikit-learn", "tqdm", "matplotlib", "scipy", 
 
 [project]
 name = "pyosv"
-version = "0.0.32"
+version = "0.0.35"
 authors = [
   { name="Alessandro Sebastianelli", email="alessandro.sebastianelli1995@gmail.com" },
 ]

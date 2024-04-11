@@ -4,3 +4,4 @@
 
 from .patch_extractor import *
 from .normalized_difference import *
+from .composite import *

@@ -131,13 +131,13 @@ def minmax_scaler(img : np.ndarray, mmin : float = None, mmax : float = None, cl
         ```
     '''
     
-    E = 0.001
     if mmin == None: mmin = np.nanmin(img)
     if mmax == None: mmax = np.nanmax(img)
     num = (img - mmin)
     den = (mmax - mmin)
     img =  np.divide(num, den, where=den != 0)
-    if clip is not None: img = np.clip(img, clip[0], clip[-1])
+    if (clip[0] is not None) and (clip[1] is not None):
+        img = np.clip(img, clip[0], clip[-1])
     
     return img
 
@@ -208,6 +208,7 @@ def std_scaler(img : np.ndarray, mmean : float = None, sstd : float = None, clip
     if sstd  == None: sstd  = np.nanstd(img)
     img = np.divide((img - mmean), std, where=std != 0)
     
-    if clip is not None: img = np.clip(img, clip[0], clip[-1])
+    if (clip[0] is not None) and (clip[1] is not None):
+        img = np.clip(img, clip[0], clip[-1])
     
     return img
